@@ -23,28 +23,28 @@ const HeroSection = () => {
   });
 
   return (
-    <section className='relative bg-gradient-to-br from-yellow-400 to-blue-500 h-screen flex items-center justify-center text-white'>
+    <section className='relative bg-gradient-to-br from-purple-700 to-orange-500 h-screen flex items-center justify-center text-white'>
       <div className='container mx-auto px-6 flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0'>
         {/* Animated Text Section */}
         <animated.div style={fadeIn} className='md:w-1/2'>
           <h1 className='text-4xl md:text-5xl font-bold leading-tight'>
             Power Your Life with{' '}
-            <span className='text-yellow-300'>Clean Solar Energy</span>
+            <span className='text-orange-300'>Clean Solar Energy</span>
           </h1>
           <p className='mt-4 text-lg md:text-xl max-w-md'>
-            CESOLE#NERGY brings sustainable energy solutions to your home and
+            CESOL3NERGY brings sustainable energy solutions to your home and
             business.
           </p>
           <div className='mt-8 space-x-4'>
             <Link
               href='/shop'
-              className='bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-lg transition duration-300'
+              className='bg-purple-600 hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300'
             >
               Shop Now
             </Link>
             <Link
               href='/contact'
-              className='bg-transparent border border-white hover:border-yellow-500 hover:bg-yellow-500 text-white font-bold py-3 px-6 rounded-lg transition duration-300'
+              className='bg-transparent border border-white hover:border-orange-400 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-lg transition duration-300'
             >
               Get a Quote
             </Link>
@@ -54,7 +54,7 @@ const HeroSection = () => {
         {/* Animated Image Section */}
         <animated.div style={slideIn} className='md:w-1/2'>
           <img
-            src='images/panels.jpeg'
+            src='images/panels1.jpg'
             alt='Solar Panels'
             className='w-full h-auto transform hover:scale-105 transition-transform duration-500'
           />

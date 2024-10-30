@@ -10,11 +10,11 @@ const Navbar = () => {
    const toggleMenu = () => setIsOpen(!isOpen);
    const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
    return (
-     <nav className=' bg-gradient-to-r from-blue-500 to-yellow-500 p-4 text-white'>
+     <nav className=' bg-gradient-to-r from-purple-700 to-orange-500 p-4 text-white'>
        <div className='max-w-7xl mx-auto flex items-center justify-between'>
-         {/* Logo */} 
+         {/* Logo */}
          <div className='text-2xl font-bold'>
-           <Link href='/'>Cesole3nergy</Link>
+           <Link href='/'>Cesol3nergy</Link>
          </div>
 
          {/* Hamburger Icon */}

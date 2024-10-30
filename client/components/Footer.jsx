@@ -3,6 +3,7 @@
 
 import { useSpring, animated } from '@react-spring/web';
 import Link from 'next/link';
+import {FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaWhatsapp} from 'react-icons/fa'
 
 const Footer = () => {
   const fadeIn = useSpring({ opacity: 1, from: { opacity: 0 }, delay: 200 });
@@ -14,7 +15,7 @@ const Footer = () => {
           {/* Company Info */}
 
           <div>
-            <h4 className='text-lg font-bold mb-4'>CESOLE#NERGY</h4>
+            <h4 className='text-lg font-bold mb-4'>CESOL3NERGY</h4>
             <p className='mb-2'>
               Your trusted partner for clean solar energy solutions.
             </p>
@@ -52,32 +53,38 @@ const Footer = () => {
           <div>
             <h4 className='text-lg font-bold mb-4'>Contact Us</h4>
             <p className='mb-2'>Email: support@cesoleenergy.com</p>
-            <p>Phone: (123) 456-7890</p>
+            <p>Phone: (+234) 906 699 6674</p>
             <div className='flex space-x-4 mt-4'>
-              <a
+              <Link
                 href='#'
                 className='text-gray-400 hover:text-white transition-colors duration-300'
               >
-                <i className='fab fa-facebook-f'></i> {/* Font Awesome icon */}
-              </a>
-              <a
+                <FaFacebook />
+              </Link>
+              <Link
                 href='#'
                 className='text-gray-400 hover:text-white transition-colors duration-300'
               >
-                <i className='fab fa-twitter'></i> {/* Font Awesome icon */}
-              </a>
-              <a
+                <FaWhatsapp />
+              </Link>
+              <Link
                 href='#'
                 className='text-gray-400 hover:text-white transition-colors duration-300'
               >
-                <i className='fab fa-instagram'></i> {/* Font Awesome icon */}
-              </a>
-              <a
+                <FaInstagram />
+              </Link>
+              <Link
                 href='#'
                 className='text-gray-400 hover:text-white transition-colors duration-300'
               >
-                <i className='fab fa-linkedin-in'></i> {/* Font Awesome icon */}
-              </a>
+                <FaLinkedin />
+              </Link>
+              <Link
+                href='#'
+                className='text-gray-400 hover:text-white transition-colors duration-300'
+              >
+                <FaTwitter />
+              </Link>
             </div>
           </div>
         </div>
@@ -86,7 +93,7 @@ const Footer = () => {
       {/* Bottom Copyright */}
       <div className='text-center py-4 border-t border-gray-700 mt-6'>
         <p>
-          &copy; {new Date().getFullYear()} CESOLE#NERGY. All rights reserved.
+          &copy; {new Date().getFullYear()} CESOL3NERGY. All rights reserved.
         </p>
       </div>
     </footer>

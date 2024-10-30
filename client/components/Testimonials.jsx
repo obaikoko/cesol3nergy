@@ -8,7 +8,7 @@ const testimonials = [
   {
     name: 'Jane Doe',
     title: 'Eco Enthusiast',
-    quote: 'CESOLE#NERGY has transformed our energy consumption at home!',
+    quote: 'CESOL3NERGY has transformed our energy consumption at home!',
     image: '/images/customer1.jpg',
   },
   {
@@ -48,7 +48,9 @@ export default function Testimonials() {
   return (
     <section className='py-20 bg-gradient-to-br from-gray-100 to-gray-200'>
       <div className='container mx-auto text-center'>
-        <h2 className='text-3xl font-bold text-green-800 mb-8'>Testimonials</h2>
+        <h2 className='text-3xl font-bold text-purple-800 mb-8'>
+          Testimonials
+        </h2>
         <div className='relative w-full max-w-lg mx-auto'>
           <animated.div
             style={slideIn}
@@ -73,13 +75,13 @@ export default function Testimonials() {
                   (index - 1 + testimonials.length) % testimonials.length
                 )
               }
-              className='text-green-500 hover:text-green-700'
+              className='text-purple-500 hover:text-purple-700'
             >
               &#8592; Prev
             </button>
             <button
               onClick={() => setIndex((index + 1) % testimonials.length)}
-              className='text-green-500 hover:text-green-700'
+              className='text-purple-500 hover:text-purple-700'
             >
               Next &#8594;
             </button>
