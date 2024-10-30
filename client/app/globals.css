@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  /* color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif; */
+}
+
+@keyframes bgWaves {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.bg-waves {
+  background: linear-gradient(270deg, #f5f7fa, #c3cfe2);
+  background-size: 400% 400%;
+  animation: bgWaves 15s ease infinite;
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+@layer components {
+  .loading-spinner {
+    @apply w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full;
+    @apply animate-spin;
+  }
+}
+
