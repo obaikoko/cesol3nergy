@@ -8,25 +8,25 @@ const products = [
   {
     title: 'Portable Solar Generator',
     description: 'Compact and powerful, ideal for on-the-go.',
-    price: '$499',
+    price: '600K',
     image: '/images/solar-gen.jpg',
   },
   {
     title: 'Home Inverter System',
     description: 'Efficient and reliable inverter solution.',
-    price: '$899',
+    price: '2M',
     image: '/images/home-inverter-system.jpg',
   },
   {
     title: 'Solar Battery Pack',
     description: 'High-capacity storage for continuous power.',
-    price: '$399',
+    price: '300K',
     image: '/images/battery.jpg',
   },
   {
     title: 'Premium Solar Panel',
     description: 'High-efficiency panel for maximum output.',
-    price: '$299',
+    price: '250K',
     image: '/images/solar-panels.png',
   },
 ];
@@ -65,7 +65,9 @@ export default function FeaturedProducts() {
                   {product.title}
                 </h3>
                 <p className='text-gray-600 my-2'>{product.description}</p>
-                <p className='text-yellow-500 font-bold'>{product.price}</p>
+                <p className='text-yellow-500 font-bold'>
+                  &#8358;{product.price}
+                </p>
               </div>
             </animated.div>
           ))}

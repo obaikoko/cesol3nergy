@@ -14,13 +14,10 @@ const page = () => {
     <div>
       <HeroSection />
       <CoreOfferings />
-      <FeaturedProducts/>
-      <Testimonials/>
-      <BlogSection/>
+      <FeaturedProducts />
+      <Testimonials />
+      <BlogSection />
       <WhyChooseUs />
-
-      {/* <ProductListing /> */}
-      {/* <Spinner/> */}
     </div>
   );
 };
