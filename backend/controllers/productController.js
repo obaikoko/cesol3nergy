@@ -6,6 +6,7 @@ import cloudinary from '../config/cloudinary.js';
 // @route GET /api/products
 // @privacy Public
 const getProducts = asyncHandler(async (req, res) => {
+  const category = req.query.category;
   const keyword = req.query.keyword
     ? {
         name: {
@@ -15,11 +16,16 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {};
 
+  let query =
+    category && category !== 'All'
+      ? { ...keyword, category: { $regex: category, $options: 'i' } }
+      : keyword;
+
   const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
-  const count = await Product.countDocuments({ ...keyword });
+  const count = await Product.countDocuments(query);
 
-  const products = await Product.find({ ...keyword })
+  const products = await Product.find(query)
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 

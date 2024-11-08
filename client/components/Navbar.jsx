@@ -1,14 +1,37 @@
 'use client';
-
-import { useState } from 'react';
+import { useLogoutMutation } from '@/src/slices/userApiSlice';
+import { logout } from '@/src/slices/authSlice';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState('');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
+  const [logoutApi, { isLoading }] = useLogoutMutation();
+
+  useEffect(() => {
+    setIsLoggedIn(user);
+  }, [user]);
+
+  const handleLogout = async () => {
+    try {
+      await logoutApi().unwrap();
+      dispatch(logout());
+      router.push('/login');
+    } catch (error) {
+      console.log(error);
+    }
+    setIsOpen(!open);
+  };
 
   return (
     <nav className='bg-gradient-to-r from-purple-700 to-orange-500 p-4 text-white relative z-50'>
@@ -31,69 +54,118 @@ const Navbar = () => {
 
         {/* Menu Items */}
         <div
-          className={`flex flex-col md:flex-row items-center md:space-x-8 space-y-4 md:space-y-0 bg-purple-800 md:bg-transparent w-full md:w-auto left-0 absolute md:static transition-all duration-500 ease-in-out ${
+          className={`flex flex-col py-10 md:p-2 md:flex-row items-center md:space-x-8 space-y-4 md:space-y-0 bg-purple-800 md:bg-transparent w-full md:w-auto left-0 absolute md:static transition-all duration-500 ease-in-out ${
             isOpen ? 'top-16 z-40' : 'top-[-500px]'
           }`}
         >
           <Link
+            onClick={() => {
+              setIsOpen(!isOpen), setIsProfileOpen(false);
+            }}
             href='/'
             className='hover:text-yellow-200 transition duration-300'
           >
             Home
           </Link>
           <Link
+            onClick={() => {
+              setIsOpen(!isOpen), setIsProfileOpen(false);
+            }}
             href='/about'
             className='hover:text-yellow-200 transition duration-300'
           >
             About
           </Link>
           <Link
+            onClick={() => {
+              setIsOpen(!isOpen), setIsProfileOpen(false);
+            }}
             href='/services'
             className='hover:text-yellow-200 transition duration-300'
           >
             Services
           </Link>
           <Link
+            onClick={() => {
+              setIsOpen(!isOpen), setIsProfileOpen(false);
+            }}
             href='/contact'
             className='hover:text-yellow-200 transition duration-300'
           >
             Contact
           </Link>
           <Link
+            onClick={() => {
+              setIsOpen(!isOpen), setIsProfileOpen(false);
+            }}
             href='/products'
             className='hover:text-yellow-200 transition duration-300'
           >
             Products
           </Link>
 
-          {/* Profile Section */}
-          <div className='relative'>
-            <button
-              onClick={toggleProfile}
-              className='flex items-center space-x-2 focus:outline-none'
-            >
-              <span className='hidden md:inline-block'>Profile</span>
-            </button>
-            {isProfileOpen && (
-              <div className='absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden z-50'>
-                <Link
-                  href='/profile'
-                  className='block px-4 py-2 hover:bg-gray-100 transition-colors'
+          {isLoggedIn ? (
+            <>
+              {/* Profile Section */}
+              <div className='relative'>
+                <button
+                  onClick={toggleProfile}
+                  className='flex items-center space-x-2 focus:outline-none'
                 >
-                  My Profile
-                </Link>
-                <Link
-                  href='/settings'
-                  className='block px-4 py-2 hover:bg-gray-100 transition-colors'
-                >
-                  Settings
-                </Link>
-                <button className='w-full text-left block px-4 py-2 text-red-500 hover:bg-gray-100 transition-colors'>
-                  Logout
+                  <span>Profile</span>
                 </button>
+                {isProfileOpen && (
+                  <div className='absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden z-50'>
+                    <Link
+                      onClick={() => {
+                        setIsOpen(!isOpen), setIsProfileOpen(false);
+                      }}
+                      href='/profile'
+                      className='block px-4 py-2 hover:bg-gray-100 transition-colors'
+                    >
+                      My Profile
+                    </Link>
+                    {isLoggedIn.isAdmin && (
+                      <>
+                        <Link
+                          onClick={() => {
+                            setIsOpen(!isOpen), setIsProfileOpen(false);
+                          }}
+                          href='/dashboard'
+                          className='block px-4 py-2 hover:bg-gray-100 transition-colors'
+                        >
+                          Dashboard
+                        </Link>
+                        <Link
+                          onClick={() => {
+                            setIsOpen(!isOpen), setIsProfileOpen(false);
+                          }}
+                          href='/orders'
+                          className='block px-4 py-2 hover:bg-gray-100 transition-colors'
+                        >
+                          Orders
+                        </Link>
+                      </>
+                    )}
+
+                    <button
+                      className='w-full text-left block px-4 py-2 text-red-500 hover:bg-gray-100 transition-colors'
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            </>
+          ) : (
+            <Link
+              href='/login'
+              className='hover:text-yellow-200 transition duration-300'
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
 

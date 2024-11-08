@@ -4,10 +4,11 @@
 import { useSpring, animated } from '@react-spring/web';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import Services from './Services';
 
-const offerings = [
+const products = [
   {
-    title: 'Solar Generators',
+    title: 'Solar Power Staion',
     description: 'Reliable power solutions on the go.',
   },
   {
@@ -20,6 +21,32 @@ const offerings = [
   },
   {
     title: 'Solar Panels',
+    description: 'Premium panels for maximum solar energy.',
+  },
+  {
+    title: 'Charge Contollers',
+    description: 'Premium panels for maximum solar energy.',
+  },
+  {
+    title: 'Solar Light',
+    description: 'Premium panels for maximum solar energy.',
+  },
+];
+const services = [
+  {
+    title: 'Maintenance & Upgrade',
+    description: 'Reliable power solutions on the go.',
+  },
+  {
+    title: 'Installation',
+    description: 'Efficient power inverters for all your needs.',
+  },
+  {
+    title: 'Consultation',
+    description: 'High-capacity batteries for energy storage.',
+  },
+  {
+    title: 'Delivery',
     description: 'Premium panels for maximum solar energy.',
   },
 ];
@@ -44,12 +71,12 @@ export default function CoreOfferings() {
         transition={{ duration: 10, ease: 'linear', repeat: Infinity }}
       />
       <animated.div style={fadeIn} className='container mx-auto text-center'>
-        <h2 className='text-3xl font-bold text-blue-800'>Our Core Offerings</h2>
+        <h2 className='text-3xl font-bold text-blue-800'>Our Core Products</h2>
         <p className='text-gray-600 mt-4 mb-10'>
-          Explore our range of solar energy solutions.
+          Explore our range of solar energy Products.
         </p>
-        <div className='flex flex-wrap justify-center gap-8'>
-          {offerings.map((offering, index) => (
+        <div className='flex flex-wrap justify-center gap-8 mb-10'>
+          {products.map((offering, index) => (
             <animated.div
               key={index}
               style={{
@@ -67,6 +94,13 @@ export default function CoreOfferings() {
           ))}
         </div>
       </animated.div>
+      <motion.div
+        className='absolute inset-0 bg-center bg-cover opacity-10'
+        style={{ backgroundImage: "url('images/pattern-randomized.svg')" }}
+        animate={{ x: [0, 50, 0], y: [0, -50, 0] }}
+        transition={{ duration: 10, ease: 'linear', repeat: Infinity }}
+      />
+      <Services/>
     </section>
   );
 }

@@ -16,6 +16,14 @@ const userSchema = new mongoose.Schema(
       require: true,
       unique: true,
     },
+    phone: {
+      type: Number,
+      require: true,
+    },
+    address: {
+      type: String,
+      require: true,
+    },
     password: {
       type: String,
       require: true,
@@ -24,6 +32,12 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       require: true,
       default: false,
+    },
+    resetPasswordToken: {
+      type: String,
+    },
+    resetPasswordExpires: {
+      type: Date,
     },
   },
   {

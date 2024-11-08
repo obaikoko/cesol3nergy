@@ -37,6 +37,34 @@ export default function AboutUs() {
   return (
     <section className='py-16 bg-gray-100 text-gray-800'>
       <div className='container mx-auto px-6'>
+        {/* Vision and Mission */}
+        <div className='text-center mb-12'>
+          <div style={fadeIn}>
+            <h2 className='text-4xl font-bold mb-6'>Our Vision & Mission</h2>
+            <div className='max-w-3xl mx-auto text-lg mb-8'>
+              <h3 className='text-2xl font-semibold text-blue-800 mb-2'>
+                Our Vision
+              </h3>
+              <p className='text-gray-600'>
+                To light up Nigeria with sustainable energy, empowering homes
+                and businesses with affordable solar power and leading the way
+                toward a cleaner, greener future for all.
+              </p>
+            </div>
+            <div className='max-w-3xl mx-auto text-lg'>
+              <h3 className='text-2xl font-semibold text-blue-800 mb-2'>
+                Our Mission
+              </h3>
+              <p className='text-gray-600'>
+                To make clean, reliable solar energy accessible to everyone,
+                helping Nigerians to power their homes and businesses
+                affordably, reduce energy costs, and take control of their power
+                needs for a brighter, sustainable future.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Company Story */}
         <div className='text-center mb-12'>
           <h2 className='text-4xl font-bold mb-4'>Our Story</h2>
