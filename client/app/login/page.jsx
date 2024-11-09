@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import Link from 'next/link';
 import Spinner from '@/components/Spinner';
 import { FaUserCircle } from 'react-icons/fa';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 function loginPage() {
   const dispatch = useDispatch();
@@ -42,6 +44,7 @@ function loginPage() {
 
   return (
     <>
+    <Navbar/>
       <div className='min-h-screen flex flex-col justify-center bg-purple-100'>
         <div className='flex items-center justify-center'>
           <form
@@ -114,6 +117,7 @@ function loginPage() {
           </form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

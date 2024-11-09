@@ -16,9 +16,7 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body>
         <Provider store={store}>
-          <Navbar />
           {children}
-          <Footer />
           <ToastContainer />
         </Provider>
       </body>

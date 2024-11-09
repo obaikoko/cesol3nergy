@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import Spinner from '@/components/Spinner';
 import { useResetPasswordMutation } from '@/src/slices/userApiSlice';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 function resetPassword() {
   const router = useRouter();
@@ -63,7 +65,8 @@ function PasswordForm({
 
   return (
     <div>
-      {/* Rest of your JSX remains the same */}
+      <Navbar />
+
       <div className='bg-blue-950 h-20'></div>
       <div className='min-h-screen flex flex-col justify-center bg-blue-100'>
         <div className='flex items-center justify-center'>
@@ -120,6 +123,7 @@ function PasswordForm({
           </form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -6,6 +6,8 @@ import { useSearchProductsQuery } from '@/src/slices/productApiSlice';
 import Products from '@/components/Products';
 import SearchBox from '@/components/SearchBox';
 import Spinner from '@/components/Spinner';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
@@ -18,12 +20,14 @@ const SearchPage = () => {
   });
   return (
     <div>
+      <Navbar/>
       <SearchBox />
       <p>
         Search Results for {category} {keyword}
       </p>
 
       {data && <Products data={data} />}
+      <Footer/>
     </div>
   );
 };

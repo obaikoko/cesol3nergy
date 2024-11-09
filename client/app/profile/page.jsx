@@ -6,6 +6,8 @@ import UserInfo from '@/components/UserInfo';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -16,13 +18,17 @@ const ProfilePage = () => {
     }
   }, [user]);
   return (
-    <div className='mx-auto mt-2'>
-      <div className='flex flex-col md:flex-row md:items-start justify-center'>
-        <UserInfo user={user} />
-        <OrderHistory />
+    <>
+      <Navbar />
+      <div className='mx-auto mt-2'>
+        <div className='flex flex-col md:flex-row md:items-start justify-center'>
+          <UserInfo user={user} />
+          <OrderHistory />
+        </div>
+        <AccountSetting user={user} />
       </div>
-      <AccountSetting user={user} />
-    </div>
+      <Footer />
+    </>
   );
 };
 

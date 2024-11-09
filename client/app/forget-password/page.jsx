@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Spinner from '@/components/Spinner';
 import { useForgetPasswordMutation } from '@/src/slices/userApiSlice';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 function forgetPassword() {
   const [formData, setFormData] = useState({
@@ -33,6 +35,7 @@ function forgetPassword() {
 
   return (
     <>
+    <Navbar/>
       <div className='min-h-screen flex flex-col justify-center bg-blue-100'>
         <div className='flex items-center justify-center'>
           <form
@@ -72,6 +75,7 @@ function forgetPassword() {
           </form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 const Orders = () => {
   return (
     <div>
       <h2 className='text-xl font-semibold mb-4'>Order Management</h2>
-      <table className='w-full bg-white shadow-md rounded-lg overflow-hidden'>
+      <table className='w-full bg-white shadow-md rounded-lg overflow-x-auto'>
         <thead>
           <tr className='bg-purple-950 text-white'>
             <th className='py-3 px-4 text-left'>Order ID</th>
@@ -38,6 +38,6 @@ const Orders = () => {
       </table>
     </div>
   );
-}
+};
 
-export default Orders
+export default Orders;
