@@ -53,7 +53,7 @@ export default function ContactUs() {
               ></textarea>
               <button
                 type='submit'
-                className='w-full py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300'
+                className='w-full py-3 bg-gradient-to-r from-purple-600 to-orange-500 text-white rounded hover:bg-blue-700 transition duration-300'
               >
                 Submit
               </button>

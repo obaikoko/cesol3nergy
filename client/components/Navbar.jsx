@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { FaShoppingCart } from 'react-icons/fa';
+import CartBtn from './CartBtn';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState('');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
@@ -42,8 +45,9 @@ const Navbar = () => {
         </div>
 
         {/* Hamburger Icon */}
-        <div className='md:hidden'>
-          <button onClick={toggleMenu} className='focus:outline-none'>
+        <div className=' flex md:hidden'>
+          <CartBtn cartItems={cartItems} />
+          <button onClick={toggleMenu} className=' ml-3 focus:outline-none'>
             <div className={`hamburger ${isOpen ? 'open' : ''}`}>
               <span className='block w-7 h-0.5 bg-white transition-transform duration-300 ease-in-out'></span>
               <span className='block w-7 h-0.5 bg-white mt-1 transition-transform duration-300 ease-in-out'></span>
@@ -103,6 +107,7 @@ const Navbar = () => {
           >
             Products
           </Link>
+          <CartBtn cartItems={cartItems} />
 
           {isLoggedIn ? (
             <>
@@ -135,15 +140,6 @@ const Navbar = () => {
                           className='block px-4 py-2 hover:bg-gray-100 transition-colors'
                         >
                           Dashboard
-                        </Link>
-                        <Link
-                          onClick={() => {
-                            setIsOpen(!isOpen), setIsProfileOpen(false);
-                          }}
-                          href='/orders'
-                          className='block px-4 py-2 hover:bg-gray-100 transition-colors'
-                        >
-                          Orders
                         </Link>
                       </>
                     )}

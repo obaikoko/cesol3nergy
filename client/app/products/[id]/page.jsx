@@ -2,29 +2,12 @@
 import { useParams } from 'next/navigation';
 import { useGetProductByIdQuery } from '@/src/slices/productApiSlice';
 import { useSpring, animated } from '@react-spring/web';
-import Slider from 'react-slick';
 import { useEffect, useState } from 'react';
 import Spinner from '@/components/Spinner';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-
-// const product = {
-//   id: 1,
-//   name: 'Portable Solar Generator 1000W',
-//   images: [
-//     '/images/solar-gen-1000w.jpg',
-//     '/images/solar-gen-1000w-angle.jpg',
-//     '/images/solar-gen-1000w-closeup.jpg',
-//   ],
-//   description: 'A high-capacity portable generator for on-the-go power needs.',
-//   specs: {
-//     wattage: '1000W',
-//     capacity: '1000Wh',
-//     compatibleDevices: 'Laptops, Smartphones, Lights',
-//   },
-//   usageTips:
-//     'Ideal for camping, backup power at home, or as a portable energy solution.',
-// };
+import Link from 'next/link';
+import AddToCartBtn from '@/components/AddToCartBtn';
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -59,7 +42,7 @@ const ProductPage = () => {
               <animated.div style={fadeIn} className='rounded-lg shadow-lg'>
                 <img
                   src={product.image?.url}
-                  alt={`${product.name} `}
+                  alt={`${product.name}`}
                   className='w-full h-96 object-cover rounded-lg'
                 />
               </animated.div>
@@ -68,18 +51,34 @@ const ProductPage = () => {
             {/* Product Details */}
             <div className='md:w-1/2 px-6'>
               <h1 className='text-3xl font-bold mb-4'>{product.name}</h1>
-              <p className='text-gray-700 mb-4'>{product.category}</p>
+              <p className='text-gray-700 mb-2'>
+                <strong>Category:</strong> {product.category}
+              </p>
+              <p className='text-gray-700 mb-2'>
+                <strong>Brand:</strong> {product.brand}
+              </p>
+              <p className='text-gray-700 mb-2'>
+                <strong>Price:</strong> ${product.price}
+              </p>
+              <p className='text-gray-700 mb-2'>
+                <strong>In Stock:</strong> {product.countInStock}
+              </p>
+              <p className='text-gray-700 mb-4'>
+                <strong>Rating:</strong> {product.rating} ({product.numReviews}{' '}
+                reviews)
+              </p>
+
               <h3 className='text-lg font-semibold mb-2'>Description:</h3>
               <p>{product.description}</p>
 
-              {/* CTA Buttons */}
               <div className='flex space-x-4 my-4'>
-                <button className='px-6 py-3 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors'>
-                  Add to Cart
-                </button>
-                <button className='px-6 py-3 bg-transparent border border-purple-600 text-purple-600 rounded hover:bg-purple-600 hover:text-white transition-colors'>
+                <AddToCartBtn product={product} />
+                <Link
+                  href='/contact'
+                  className='px-6 py-3 bg-transparent border border-purple-600 text-purple-600 rounded hover:bg-purple-600 hover:text-white transition-colors'
+                >
                   Contact Us
-                </button>
+                </Link>
               </div>
             </div>
           </div>
