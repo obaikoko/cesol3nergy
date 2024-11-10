@@ -6,23 +6,25 @@ import Link from 'next/link';
 const UsersList = () => {
   const { data, isLoading, isError } = useGetUsersQuery();
 
-  
-
   return (
     <div>
-      <h2 className='text-xl font-semibold mb-4'>Product Management</h2>
+      <h2 className='text-xl font-semibold mb-4'>User Management</h2>
+
       {isLoading && (
         <div className='flex items-center justify-center'>
           <Spinner sync={true} size={10} />
         </div>
       )}
-      {!isLoading && !data && (
+
+      {!isLoading && isError && (
         <p className='text-red-500'>
           Failed to load users. Please try again later.
         </p>
       )}
-      {data && (
-        <table className='w-full bg-white shadow-md rounded-lg overflow-hidden'>
+
+      {/* Table for medium and larger screens */}
+      <div className='hidden sm:block overflow-x-auto'>
+        <table className='w-full bg-white shadow-md rounded-lg'>
           <thead>
             <tr className='bg-purple-950 text-white'>
               <th className='py-3 px-4 text-left'>Email</th>
@@ -33,8 +35,7 @@ const UsersList = () => {
             </tr>
           </thead>
           <tbody>
-            {/* Dummy data rows */}
-            {data.map((user) => (
+            {data?.map((user) => (
               <tr key={user._id} className='border-b'>
                 <td className='py-3 px-4'>{user.email}</td>
                 <td className='py-3 px-4'>
@@ -44,7 +45,7 @@ const UsersList = () => {
                 <td className='py-3 px-4'>{user.address}</td>
                 <td className='py-3 px-4'>
                   <Link
-                    href={`/users/${user._id}`}
+                    href={`/profile/${user._id}`}
                     className='text-blue-500 hover:underline'
                   >
                     View
@@ -54,7 +55,35 @@ const UsersList = () => {
             ))}
           </tbody>
         </table>
-      )}
+      </div>
+
+      {/* Card view for smaller screens */}
+      <div className='sm:hidden space-y-4'>
+        {data?.map((user) => (
+          <div key={user._id} className='bg-white p-4 shadow-md rounded-lg'>
+            <p>
+              <strong>Email:</strong> {user.email}
+            </p>
+            <p>
+              <strong>Name:</strong> {user.firstName} {user.lastName}
+            </p>
+            <p>
+              <strong>Phone:</strong> {user.phone}
+            </p>
+            <p>
+              <strong>Address:</strong> {user.address}
+            </p>
+            <div className='mt-2'>
+              <Link
+                href={`/users/${user._id}`}
+                className='text-blue-500 hover:underline'
+              >
+                View Details
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

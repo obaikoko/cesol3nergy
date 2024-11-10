@@ -7,6 +7,7 @@ import {
   FaChartLine,
   FaCogs,
   FaBars,
+  FaSignOutAlt,
 } from 'react-icons/fa';
 import Orders from '@/components/Orders';
 import ProductList from '@/components/ProductList';
@@ -58,6 +59,13 @@ function AdminDashboard() {
               <span>{label}</span>
             </button>
           ))}
+          <button
+            // onClick={handleLogout}
+            className='flex items-center space-x-3 p-2 rounded-md hover:bg-purple-700 '
+          >
+            <FaSignOutAlt />
+            <span>Logout</span>
+          </button>
         </nav>
       </aside>
 
