@@ -1,15 +1,14 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   useProfileMutation,
   useUpdateUserMutation,
 } from '@/src/slices/userApiSlice';
-import { setCredentials } from '@/src/slices/authSlice';
+
 import { toast } from 'react-toastify';
 
 const UserInfo = ({ user }) => {
-  const dispatch = useDispatch();
   const { user: loggedInUser } = useSelector((state) => state.auth);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -66,7 +65,9 @@ const UserInfo = ({ user }) => {
             <h2 className='text-2xl font-semibold text-gray-800'>
               {formData.firstName} {formData.lastName}
             </h2>
-            <p className='text-gray-600 mt-1'>Customer</p>
+            <p className='text-gray-600 mt-1'>
+              {user.isAdmin ? 'Aministrator' : 'Customer'}
+            </p>
           </div>
 
           {/* User Info */}
