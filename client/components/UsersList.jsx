@@ -75,7 +75,7 @@ const UsersList = () => {
             </p>
             <div className='mt-2'>
               <Link
-                href={`/users/${user._id}`}
+                href={`/profile/${user._id}`}
                 className='text-blue-500 hover:underline'
               >
                 View Details
