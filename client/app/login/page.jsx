@@ -36,7 +36,11 @@ function loginPage() {
       dispatch(setCredentials({ ...res }));
 
       toast.success(`Welcome ${res.firstName} ${res.lastName}`);
-      router.push('/profile');
+      if (res.isAdmin) {
+        router.push(`/dashboard`);
+      } else {
+        router.push(`/profile/${res._id}`);
+      }
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -44,7 +48,7 @@ function loginPage() {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className='min-h-screen flex flex-col justify-center bg-purple-100'>
         <div className='flex items-center justify-center'>
           <form
@@ -117,7 +121,7 @@ function loginPage() {
           </form>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

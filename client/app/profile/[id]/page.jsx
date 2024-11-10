@@ -3,7 +3,7 @@ import { useGetUserDetailsQuery } from '@/src/slices/userApiSlice';
 import AccountSetting from '@/components/AccountSetting';
 import OrderHistory from '@/components/OrderHistory';
 import UserInfo from '@/components/UserInfo';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter, useParams } from 'next/navigation';
 import Navbar from '@/components/Navbar';
@@ -13,10 +13,13 @@ import Spinner from '@/components/Spinner';
 const ProfilePage = () => {
   const router = useRouter();
   const { id } = useParams();
-
+  const [isLoggedIn, setIsLogged] = useState('');
 
   const { data, isLoading, isError } = useGetUserDetailsQuery(id);
-  // const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+  useEffect(() => {
+    setIsLogged(user);
+  }, [user]);
   if (isLoading) {
     return (
       <>
@@ -24,7 +27,7 @@ const ProfilePage = () => {
         <div className='flex items-center '>
           <Spinner sync={true} size={10} />
         </div>
-        <Footer/>
+        <Footer />
       </>
     );
   }
@@ -34,7 +37,12 @@ const ProfilePage = () => {
       <Navbar />
       <div className='mx-auto mt-2'>
         <div className='flex flex-col md:flex-row md:items-start justify-center'>
-          <UserInfo user={data} />
+          {isLoggedIn && isLoggedIn.isAdmin ? (
+            <UserInfo user={data} />
+          ) : (
+            <UserInfo user={isLoggedIn} />
+          )}
+
           <OrderHistory />
         </div>
         <AccountSetting user={data} />
