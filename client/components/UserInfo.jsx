@@ -42,7 +42,7 @@ const UserInfo = ({ user }) => {
         userId: user?._id,
         ...formData,
       }).unwrap();
-      dispatch(setCredentials(res));
+      // dispatch(setCredentials(res));
       toast.success('Profile updated successfully');
       setIsEditing(false);
     } catch (err) {
