@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { useState } from 'react';
 
-export default function CheckoutPage() {
+const CheckoutPage = () => {
   // Sample data for order summary
   const orderItems = [
     { id: 1, name: 'Solar Generator', price: 200.0, quantity: 1 },
@@ -179,12 +179,12 @@ export default function CheckoutPage() {
 
             {/* Place Order Button */}
             <div className='flex justify-center'>
-              <Link
+              <button
                 type='submit'
                 className='bg-blue-500 text-white py-3 px-8 rounded-lg hover:bg-blue-600 transition-colors'
               >
                 Place Order
-              </Link>
+              </button>
             </div>
           </form>
         </div>
@@ -192,4 +192,6 @@ export default function CheckoutPage() {
       <Footer />
     </div>
   );
-}
+};
+
+export default CheckoutPage;
