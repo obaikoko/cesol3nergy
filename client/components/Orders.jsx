@@ -12,7 +12,7 @@ const Orders = () => {
       <h2 className='text-xl font-semibold mb-4'>Order Management</h2>
 
       {/* Table view for medium and larger screens */}
-      <div className='hidden sm:block overflow-x-auto'>
+      <div className=' overflow-x-auto'>
         <table className='w-full bg-white shadow-md rounded-lg'>
           <thead>
             <tr className='bg-purple-950 text-white'>
@@ -41,18 +41,7 @@ const Orders = () => {
         </table>
       </div>
 
-      {/* Card view for smaller screens */}
-      <div className='block sm:hidden space-y-4'>
-        {orders.map((order) => (
-          <div key={order.id} className='bg-white shadow-md rounded-lg p-4'>
-            <p className='text-gray-700 font-semibold'>Order ID: {order.id}</p>
-            <p className='text-gray-600'>Customer: {order.customer}</p>
-            <p className='text-gray-600'>Total Amount: {order.total}</p>
-            <p className='text-gray-600'>Status: {order.status}</p>
-            <button className='mt-2 text-blue-500 hover:underline'>View</button>
-          </div>
-        ))}
-      </div>
+     
     </div>
   );
 };

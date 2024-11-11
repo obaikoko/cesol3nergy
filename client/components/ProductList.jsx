@@ -84,10 +84,10 @@ const ProductList = () => {
       )}
       {data && (
         <div className='overflow-x-auto'>
-          <table className='w-full hidden md:table bg-white shadow-md rounded-lg overflow-hidden'>
+          <table className='w-full table bg-white shadow-md rounded-lg overflow-hidden'>
             <thead>
               <tr className='bg-purple-950 text-white text-left'>
-                <th className='py-3 px-4'>ID</th>
+              
                 <th className='py-3 px-4'>Name</th>
                 <th className='py-3 px-4'>Amount</th>
                 <th className='py-3 px-4'>Stock</th>
@@ -97,7 +97,7 @@ const ProductList = () => {
             <tbody>
               {data.products.map((product) => (
                 <tr key={product._id} className='border-b hover:bg-gray-50'>
-                  <td className='py-3 px-4 text-sm'>{product._id}</td>
+                  
                   <td className='py-3 px-4'>{product.name}</td>
                   <td className='py-3 px-4'>${product.price.toFixed(2)}</td>
                   <td className='py-3 px-4'>{product.countInStock}</td>
@@ -114,42 +114,6 @@ const ProductList = () => {
               ))}
             </tbody>
           </table>
-
-          {/* Responsive Cards for Mobile View */}
-          <div className='md:hidden'>
-            {data.products.map((product) => (
-              <div
-                key={product._id}
-                className='bg-white shadow-md rounded-lg mb-4 p-4'
-              >
-                <p className='font-semibold text-gray-700'>
-                  ID: <span className='text-gray-600'>{product._id}</span>
-                </p>
-                <p className='font-semibold text-gray-700'>
-                  Name: <span className='text-gray-600'>{product.name}</span>
-                </p>
-                <p className='font-semibold text-gray-700'>
-                  Amount:{' '}
-                  <span className='text-gray-600'>
-                    ${product.price.toFixed(2)}
-                  </span>
-                </p>
-                <p className='font-semibold text-gray-700'>
-                  Stock:{' '}
-                  <span className='text-gray-600'>{product.countInStock}</span>
-                </p>
-                <div className='flex items-center space-x-3 mt-2'>
-                  <Link
-                    href={`/products/edit/${product._id}`}
-                    className='text-purple-600 hover:text-purple-800'
-                  >
-                    <FaEdit />
-                  </Link>
-                  <DeleteProductBtn product={product} />
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       )}
 

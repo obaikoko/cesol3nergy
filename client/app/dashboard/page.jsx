@@ -23,7 +23,7 @@ function AdminDashboard() {
   };
 
   return (
-    <div className='flex min-h-screen bg-gray-100'>
+    <div className='md:flex min-h-screen bg-gray-100'>
       {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-20 w-64 bg-purple-950 text-white p-5 transform ${

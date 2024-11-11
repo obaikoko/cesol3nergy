@@ -4,7 +4,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 
 const CartBtn = ({cartItems}) => {
   return (
-    <Link href='/cart' className=' md:hidden items-center space-x-1 '>
+    <Link href='/cart' className=' items-center space-x-1 '>
       <div className='flex'>
         <FaShoppingCart className='inline mt-1 mr-1' />
         <span>CART</span>

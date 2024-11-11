@@ -65,6 +65,9 @@ const UserInfo = ({ user }) => {
             <h2 className='text-2xl font-semibold text-gray-800'>
               {formData.firstName} {formData.lastName}
             </h2>
+            <p className='text-sm text-purple-600 mt-1'>
+              {user._id}
+            </p>
             <p className='text-gray-600 mt-1'>
               {user.isAdmin ? 'Aministrator' : 'Customer'}
             </p>

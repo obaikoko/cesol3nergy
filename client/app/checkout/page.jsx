@@ -179,12 +179,12 @@ export default function CheckoutPage() {
 
             {/* Place Order Button */}
             <div className='flex justify-center'>
-              <button
+              <Link
                 type='submit'
                 className='bg-blue-500 text-white py-3 px-8 rounded-lg hover:bg-blue-600 transition-colors'
               >
                 Place Order
-              </button>
+              </Link>
             </div>
           </form>
         </div>
