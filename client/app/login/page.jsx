@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '@/src/slices/userApiSlice';
 import { setCredentials } from '@/src/slices/authSlice';
@@ -15,8 +15,7 @@ function loginPage() {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const redirect = searchParams.get('redirect') || '/';
- 
-  
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -130,4 +129,12 @@ function loginPage() {
   );
 }
 
-export default loginPage;
+const login = () => {
+  return (
+    <Suspense fallback={<Spinner clip={true} size={150} />}>
+      <loginPage />
+    </Suspense>
+  );
+};
+
+export default login;
