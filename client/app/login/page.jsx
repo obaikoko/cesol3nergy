@@ -11,7 +11,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-function loginPage() {
+const LoginPage = () => {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const redirect = searchParams.get('redirect') || '/';
@@ -50,7 +50,7 @@ function loginPage() {
   };
 
   return (
-    <>
+    <div>
       <Navbar />
       <div className='min-h-screen flex flex-col justify-center bg-purple-100'>
         <div className='flex items-center justify-center'>
@@ -125,16 +125,16 @@ function loginPage() {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
-}
+};
 
-const login = () => {
+const Login = () => {
   return (
     <Suspense fallback={<Spinner clip={true} size={150} />}>
-      <loginPage />
+      <LoginPage />
     </Suspense>
   );
 };
 
-export default login;
+export default Login;
