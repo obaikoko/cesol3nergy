@@ -114,9 +114,8 @@ const PlaceOrder = () => {
                 disabled={cart.cartItems.length === 0}
                 className='w-full py-3 bg-purple-700 text-white font-semibold rounded-lg hover:bg-purple-800 transition-colors'
               >
-                Place Order
+                {isLoading ? 'Processing...' : 'Place Order'}
               </button>
-              {isLoading && <Spinner />}
             </div>
           </div>
         </div>

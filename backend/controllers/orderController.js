@@ -151,6 +151,16 @@ const getOrders = asyncHandler(async (req, res) => {
   );
   res.json(orders);
 });
+// @desc Get user  orders
+// @route GET /api/orders
+// @privacy Private/Admin
+const getUserOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.params.id }).populate(
+    'user',
+    'id firstName lastName email address phone'
+  );
+  res.json(orders);
+});
 
 export {
   addOrderItems,
@@ -159,4 +169,5 @@ export {
   updateOrderToPaid,
   updateOrderToDelivered,
   getOrders,
+  getUserOrders
 };

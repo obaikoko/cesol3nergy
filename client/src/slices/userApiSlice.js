@@ -67,6 +67,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    getProfile: builder.query({
+      query: () => ({
+        url: `${USERS_URL}/profile`,
+        credentials: 'include',
+      }),
+      keepUnusedDataFor: 5,
+    }),
     updateUser: builder.mutation({
       query: (data) => ({
         url: `${USERS_URL}/${data.userId}`,
@@ -104,6 +111,7 @@ export const {
   useDeleteAccountMutation,
   useUpdateUserMutation,
   useGetUserDetailsQuery,
+  useGetProfileQuery,
   useForgetPasswordMutation,
   useResetPasswordMutation,
 } = usersApiSlice;

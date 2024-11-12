@@ -125,7 +125,7 @@ const Navbar = () => {
                       onClick={() => {
                         setIsOpen(!isOpen), setIsProfileOpen(false);
                       }}
-                      href={`/profile/${isLoggedIn._id}`}
+                      href='/profile'
                       className='block px-4 py-2 hover:bg-gray-100 transition-colors'
                     >
                       My Profile
