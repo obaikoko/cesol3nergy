@@ -99,7 +99,7 @@ const ProductList = () => {
                 <tr key={product._id} className='border-b hover:bg-gray-50'>
                   
                   <td className='py-3 px-4'>{product.name}</td>
-                  <td className='py-3 px-4'>${product.price.toFixed(2)}</td>
+                  <td className='py-3 px-4'>&#8358;{product.price.toLocaleString()}</td>
                   <td className='py-3 px-4'>{product.countInStock}</td>
                   <td className='py-3 px-4 flex space-x-3 items-center'>
                     <Link

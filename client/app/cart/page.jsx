@@ -4,10 +4,13 @@ import { addToCart, removeFromCart } from '@/src/slices/cartSlice';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function CartPage() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const cart = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
   const { cartItems } = cart;
 
   // Update quantity
@@ -25,6 +28,14 @@ export default function CartPage() {
   const calculateTotal = cartItems
     .reduce((total, item) => total + item.price * item.qty, 0)
     .toFixed(2);
+  const checkOutHandler = () => {
+    if (user) {
+      router.push('/shipping');
+    } else {
+      router.push('/login?redirect=shipping');
+      // router.push('/login');
+    }
+  };
 
   return (
     <div>
@@ -67,7 +78,7 @@ export default function CartPage() {
                         {item.name}
                       </td>
                       <td className='py-2 px-4 border border-gray-200'>
-                        ${item.price.toFixed(2)}
+                        &#8358;{item.price.toLocaleString()}
                       </td>
                       <td className='py-2 px-4 border border-gray-200'>
                         <div className='flex items-center space-x-2'>
@@ -87,7 +98,8 @@ export default function CartPage() {
                         </div>
                       </td>
                       <td className='py-2 px-4 border border-gray-200'>
-                        ${(item.price * item.qty).toFixed(2)}
+                        &#8358;
+                        {(item.price * item.qty).toLocaleString()}
                       </td>
                       <td className='py-2 px-4 border border-gray-200 text-center'>
                         <button
@@ -105,11 +117,14 @@ export default function CartPage() {
               {/* Cart Summary */}
               <div className='flex  flex-col md:flex-row md:justify-between items-center border-t border-gray-200 pt-4'>
                 <div className='text-lg font-semibold text-gray-800'>
-                  Total: ${calculateTotal}
+                  Total: &#8358;{Number(calculateTotal).toLocaleString()}
                 </div>
-                <Link href='/shipping' className=' my-2 bg-gradient-to-r from-purple-500 to-orange-600 text-white py-2 px-6 rounded-lg hover:bg-purple-600 transition-colors'>
+                <button
+                  onClick={checkOutHandler}
+                  className=' my-2 bg-gradient-to-r from-purple-500 to-orange-600 text-white py-2 px-6 rounded-lg hover:bg-purple-600 transition-colors'
+                >
                   Proceed to Checkout
-                </Link>
+                </button>
               </div>
             </div>
           )}

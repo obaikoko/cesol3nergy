@@ -72,7 +72,7 @@ const getMyOrders = asyncHandler(async (req, res) => {
 const getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id).populate(
     'user',
-    'firstName lastName email'
+    'firstName lastName email phone'
   );
 
   if (order) {

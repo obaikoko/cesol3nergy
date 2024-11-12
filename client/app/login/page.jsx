@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '@/src/slices/userApiSlice';
 import { setCredentials } from '@/src/slices/authSlice';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
 import Spinner from '@/components/Spinner';
@@ -13,6 +13,10 @@ import Footer from '@/components/Footer';
 
 function loginPage() {
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get('redirect') || '/';
+ 
+  
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -39,7 +43,7 @@ function loginPage() {
       if (res.isAdmin) {
         router.push(`/dashboard`);
       } else {
-        router.push(`/profile/${res._id}`);
+        router.push(redirect);
       }
     } catch (err) {
       toast.error(err?.data?.message || err.error);

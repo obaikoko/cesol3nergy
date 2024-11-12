@@ -39,13 +39,13 @@ const ProductPage = () => {
           <div className='container mx-auto flex flex-col md:flex-row'>
             {/* Product Images with Slider */}
             <div className='md:w-1/2 mb-8 md:mb-0'>
-              <animated.div style={fadeIn} className='rounded-lg shadow-lg'>
+              <div style={fadeIn} className='rounded-lg shadow-lg'>
                 <img
                   src={product.image?.url}
                   alt={`${product.name}`}
                   className='w-full h-96 object-cover rounded-lg'
                 />
-              </animated.div>
+              </div>
             </div>
 
             {/* Product Details */}
@@ -58,15 +58,15 @@ const ProductPage = () => {
                 <strong>Brand:</strong> {product.brand}
               </p>
               <p className='text-gray-700 mb-2'>
-                <strong>Price:</strong> ${product.price}
+                <strong>Price:</strong> &#8358;{product.price.toLocaleString()}
               </p>
               <p className='text-gray-700 mb-2'>
                 <strong>In Stock:</strong> {product.countInStock}
               </p>
-              <p className='text-gray-700 mb-4'>
+              {/* <p className='text-gray-700 mb-4'>
                 <strong>Rating:</strong> {product.rating} ({product.numReviews}{' '}
                 reviews)
-              </p>
+              </p> */}
 
               <h3 className='text-lg font-semibold mb-2'>Description:</h3>
               <p>{product.description}</p>

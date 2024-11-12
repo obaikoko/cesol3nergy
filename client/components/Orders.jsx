@@ -1,16 +1,19 @@
 import React from 'react';
+import { useGetOrdersQuery } from '@/src/slices/orderApiSlice';
+import Link from 'next/link';
+import Spinner from './Spinner';
 
 const Orders = () => {
-  const orders = [
-    { id: '#1001', customer: 'John Doe', total: '$150', status: 'Delivered' },
-    { id: '#1002', customer: 'Jane Smith', total: '$250', status: 'Pending' },
-    // Add more orders here as needed
-  ];
+  const { data: orders, isLoading, isError } = useGetOrdersQuery();
 
   return (
     <div className='overflow-x-hidden'>
       <h2 className='text-xl font-semibold mb-4'>Order Management</h2>
-
+      {!orders && isLoading && (
+        <div className='flex items-center justify-center'>
+          <Spinner sync={true} size={10} />
+        </div>
+      )}
       {/* Table view for medium and larger screens */}
       <div className=' overflow-x-auto'>
         <table className='w-full bg-white shadow-md rounded-lg'>
@@ -19,29 +22,44 @@ const Orders = () => {
               <th className='py-3 px-4 text-left'>Order ID</th>
               <th className='py-3 px-4 text-left'>Customer</th>
               <th className='py-3 px-4 text-left'>Total Amount</th>
-              <th className='py-3 px-4 text-left'>Status</th>
+              <th className='py-3 px-4 text-left'>Payment </th>
+              <th className='py-3 px-4 text-left'>Delivered</th>
+
               <th className='py-3 px-4 text-left'>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order.id} className='border-b'>
-                <td className='py-3 px-4'>{order.id}</td>
-                <td className='py-3 px-4'>{order.customer}</td>
-                <td className='py-3 px-4'>{order.total}</td>
-                <td className='py-3 px-4'>{order.status}</td>
-                <td className='py-3 px-4'>
-                  <button className='text-blue-500 hover:underline'>
-                    View
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+
+          {orders && !isLoading && !isError && (
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id} className='border-b'>
+                  <td className='py-3 px-4'>{order._id}</td>
+                  <td className='py-3 px-4'>
+                    {order.user.firstName} {order.user.lastName}
+                  </td>
+                  <td className='py-3 px-4'>
+                    &#8358;{order.totalPrice.toLocaleString()}
+                  </td>
+                  <td className='py-3 px-4'>
+                    {order.isPaid ? 'Paid' : 'Not Paid'}
+                  </td>
+                  <td className='py-3 px-4'>
+                    {order.isPaidisDelivered ? 'Delivered' : 'Not Delivered'}
+                  </td>
+                  <td className='py-3 px-4'>
+                    <Link
+                      href={`/order/${order._id}`}
+                      className='text-blue-500 hover:underline'
+                    >
+                      View
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
-
-     
     </div>
   );
 };

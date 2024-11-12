@@ -17,7 +17,7 @@ const Products = ({data}) => {
               <p className='text-gray-600 mt-2 line-clamp-3'>
                 {product.description}
               </p>
-              <p className='text-purple-600 mt-2'>&#8358;{product.price}</p>
+              <p className='text-purple-600 mt-2'>&#8358;{product.price?.toLocaleString()}</p>
             </div>
           </Link>
         ))}
