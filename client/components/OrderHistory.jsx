@@ -1,82 +1,66 @@
 import React from 'react';
+import { useGetMyOrdersQuery } from '@/src/slices/orderApiSlice';
+import Link from 'next/link';
+import Spinner from './Spinner';
 
 const OrderHistory = () => {
-  const orderHistory = [
-    {
-      orderId: '12345',
-      totalAmount: '$300.00',
-      paymentStatus: 'Paid',
-      deliveryStatus: 'Delivered',
-      date: 'October 15, 2024',
-    },
-    {
-      orderId: '67890',
-      totalAmount: '$450.00',
-      paymentStatus: 'Pending',
-      deliveryStatus: 'Processing',
-      date: 'November 5, 2024',
-    },
-    // Add more orders as needed
-  ];
+  const { data: orders, isLoading, isError } = useGetMyOrdersQuery();
+  console.log(orders);
+  
+
   return (
-    <div>
-      
-      {/* Order History Table */}
-      <div className='bg-white rounded-xl shadow-lg w-full max-w-4xl p-6 mb-8 transform transition-transform overflow-auto max-h-screen'>
-        <h3 className='text-xl font-semibold text-gray-800 mb-4'>
-          Order History
-        </h3>
-        {orderHistory ? (<table className='min-w-full border-collapse border border-gray-200'>
+    <div className='overflow-x-hidden'>
+      <h2 className='text-xl font-semibold mb-4'>Order Management</h2>
+      {!orders && isLoading && (
+        <div className='flex items-center justify-center'>
+          <Spinner sync={true} size={10} />
+        </div>
+      )}
+      {/* Table view for medium and larger screens */}
+      <div className=' overflow-x-auto'>
+        <table className='w-full bg-white shadow-md rounded-lg'>
           <thead>
-            <tr className='bg-gray-100 text-gray-600 text-sm uppercase'>
-              <th className='py-3 px-4 border border-gray-200 text-left'>
-                Order ID
-              </th>
-              <th className='py-3 px-4 border border-gray-200 text-left'>
-                Total Amount
-              </th>
-              <th className='py-3 px-4 border border-gray-200 text-left'>
-                Payment Status
-              </th>
-              <th className='py-3 px-4 border border-gray-200 text-left'>
-                Delivery Status
-              </th>
-              <th className='py-3 px-4 border border-gray-200 text-left'>
-                Date
-              </th>
-              <th className='py-3 px-4 border border-gray-200 text-center'>
-                Actions
-              </th>
+            <tr className='bg-purple-950 text-white'>
+              <th className='py-3 px-4 text-left'>Order ID</th>
+              <th className='py-3 px-4 text-left'>Customer</th>
+              <th className='py-3 px-4 text-left'>Total Amount</th>
+              <th className='py-3 px-4 text-left'>Payment </th>
+              <th className='py-3 px-4 text-left'>Delivered</th>
+
+              <th className='py-3 px-4 text-left'>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {orderHistory.map((order, index) => (
-              <tr key={index} className='text-gray-700'>
-                <td className='py-3 px-4 border border-gray-200'>
-                  {order.orderId}
-                </td>
-                <td className='py-3 px-4 border border-gray-200'>
-                  {order.totalAmount}
-                </td>
-                <td className='py-3 px-4 border border-gray-200'>
-                  {order.paymentStatus}
-                </td>
-                <td className='py-3 px-4 border border-gray-200'>
-                  {order.deliveryStatus}
-                </td>
-                <td className='py-3 px-4 border border-gray-200'>
-                  {order.date}
-                </td>
-                <td className='py-3 px-4 border border-gray-200 text-center'>
-                  <button className='bg-purple-500 text-white py-1 px-3 rounded hover:bg-purple-600 transition-colors'>
-                    View Details
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>) : ('you have not made any order yet')}
-        
+
+          {orders && !isLoading && !isError && (
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id} className='border-b'>
+                  <td className='py-3 px-4'>{order._id}</td>
+                  <td className='py-3 px-4'>
+                    {order.user.firstName} {order.user.lastName}
+                  </td>
+                  <td className='py-3 px-4'>
+                    &#8358;{order.totalPrice.toLocaleString()}
+                  </td>
+                  <td className='py-3 px-4'>
+                    {order.isPaid ? 'Paid' : 'Not Paid'}
+                  </td>
+                  <td className='py-3 px-4'>
+                    {order.isPaidisDelivered ? 'Delivered' : 'Not Delivered'}
+                  </td>
+                  <td className='py-3 px-4'>
+                    <Link
+                      href={`/order/${order._id}`}
+                      className='text-blue-500 hover:underline'
+                    >
+                      View
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
       </div>
     </div>
   );

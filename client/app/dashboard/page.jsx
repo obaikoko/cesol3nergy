@@ -12,14 +12,31 @@ import {
 import Orders from '@/components/Orders';
 import ProductList from '@/components/ProductList';
 import UsersList from '@/components/UsersList';
+import { useLogoutMutation } from '@/src/slices/userApiSlice';
+import { logout } from '@/src/slices/authSlice';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 function AdminDashboard() {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [logoutApi, { isLoading }] = useLogoutMutation();
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
     setIsSidebarOpen(false); // Close sidebar on mobile when navigating
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logoutApi().unwrap();
+      dispatch(logout());
+      router.push('/login');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -60,7 +77,7 @@ function AdminDashboard() {
             </button>
           ))}
           <button
-            // onClick={handleLogout}
+            onClick={handleLogout}
             className='flex items-center space-x-3 p-2 rounded-md hover:bg-purple-700 '
           >
             <FaSignOutAlt />

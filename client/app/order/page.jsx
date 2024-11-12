@@ -84,7 +84,8 @@ const PlaceOrder = () => {
                         {item.name}
                       </Link>
                       <p className='text-gray-500'>
-                        {item.qty} x &#8358;{item.price.toLocaleString()} = $
+                        {item.qty} x &#8358;{item.price.toLocaleString()} =
+                        &#8358;
                         {(item.qty * item.price).toLocaleString()}
                       </p>
                     </div>

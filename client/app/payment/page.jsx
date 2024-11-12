@@ -56,8 +56,8 @@ const PaymentInformation = () => {
               required
             >
               <option value=''>Select Method</option>
-              <option value='card'>Credit/Debit Card</option>
-              <option value='bank_transfer'>Bank Transfer</option>
+              <option value='Card'>Credit/Debit Card</option>
+              <option value='Bank Transfer'>Bank Transfer</option>
             </select>
           </div>
 
