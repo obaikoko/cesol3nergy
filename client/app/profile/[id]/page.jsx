@@ -30,11 +30,20 @@ const ProfilePage = () => {
         <Footer />
       </>
     );
+  } else if (!data && !isLoading && isError) {
+    return (
+      <div>
+        <Navbar />
+        <p>Unable to retrieve data, Please try again later</p>
+        <Footer />
+      </div>
+    );
   }
 
   return (
     <>
       <Navbar />
+
       <div className='mx-auto mt-2'>
         <div className='flex flex-col md:flex-row md:items-start justify-center'>
           {isLoggedIn && isLoggedIn.isAdmin ? (

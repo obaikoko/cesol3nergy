@@ -58,7 +58,7 @@ const Navbar = () => {
 
         {/* Menu Items */}
         <div
-          className={`flex flex-col py-10 md:p-2 md:flex-row items-center md:space-x-8 space-y-4 md:space-y-0 bg-purple-800 md:bg-transparent w-full md:w-auto left-0 absolute md:static transition-all duration-500 ease-in-out ${
+          className={`flex flex-col py-10 md:p-2 md:flex-row items-center md:space-x-8 space-y-4 md:space-y-0 bg-grad bg-purple-800 md:bg-transparent w-full md:w-auto left-0 absolute md:static transition-all duration-500 ease-in-out ${
             isOpen ? 'top-16 z-40' : 'top-[-500px]'
           }`}
         >

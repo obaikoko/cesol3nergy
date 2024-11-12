@@ -28,7 +28,7 @@ const OrderDetailsPage = () => {
       {!loadingOrder && order && !orderError && (
         <>
           <div className='flex flex-col items-center p-6 md:p-10 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen'>
-            <div className='bg-white rounded-xl shadow-lg w-full max-w-4xl p-6 md:p-8 mb-8 transform transition-transform hover:scale-105'>
+            <div className='bg-white rounded-xl shadow-lg w-full max-w-4xl p-6 md:p-8 mb-8 transform transition-transform '>
               <h2 className='text-2xl font-semibold text-gray-800 mb-4'>
                 Order Details
               </h2>
@@ -42,10 +42,12 @@ const OrderDetailsPage = () => {
                   <strong>Order ID:</strong> {order._id}
                 </p>
                 <p>
-                  <strong>Order Date:</strong> {order.createdAt.substring(0, 10)}
+                  <strong>Order Date:</strong>{' '}
+                  {order.createdAt.substring(0, 10)}
                 </p>
                 <p>
-                  <strong>Total Amount:</strong> &#8358;{order.totalPrice.toLocaleString()}
+                  <strong>Total Amount:</strong> &#8358;
+                  {order.totalPrice.toLocaleString()}
                 </p>
                 <p>
                   <strong>Payment Status:</strong>{' '}
@@ -116,9 +118,6 @@ const OrderDetailsPage = () => {
                   </tbody>
                 </table>
               </div>
-
-             
-             
 
               {/* Actions */}
               <div className='flex justify-end space-x-4'>
