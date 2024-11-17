@@ -8,6 +8,7 @@ import {
   FaCogs,
   FaBars,
   FaSignOutAlt,
+  FaTimes,
 } from 'react-icons/fa';
 import Orders from '@/components/Orders';
 import ProductList from '@/components/ProductList';
@@ -16,6 +17,8 @@ import { useLogoutMutation } from '@/src/slices/userApiSlice';
 import { logout } from '@/src/slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
+import { useGetDataQuery } from '@/src/slices/dataSlice';
+import Spinner from '@/components/Spinner';
 
 function AdminDashboard() {
   const dispatch = useDispatch();
@@ -23,6 +26,7 @@ function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [logoutApi, { isLoading }] = useLogoutMutation();
+  const { data, isLoading: loadindData, isError } = useGetDataQuery();
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -47,12 +51,6 @@ function AdminDashboard() {
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform lg:relative lg:translate-x-0`}
       >
-        <button
-          className='block lg:hidden text-white mb-4'
-          onClick={() => setIsSidebarOpen(false)}
-        >
-          Close
-        </button>
         <h2 className='text-2xl font-bold mb-6'>Admin Dashboard</h2>
         <nav className='flex flex-col space-y-4'>
           {[
@@ -89,9 +87,9 @@ function AdminDashboard() {
       {/* Mobile Sidebar Toggle Button */}
       <button
         className='lg:hidden fixed top-4 right-4 z-30 p-2  text-purple-900 rounded-full shadow-lg'
-        onClick={() => setIsSidebarOpen(true)}
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        <FaBars size={24} />
+        {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </button>
 
       {/* Main Content */}
@@ -102,25 +100,41 @@ function AdminDashboard() {
 
         {/* Dashboard Overview */}
         {activeTab === 'dashboard' && (
-          <div>
-            <p className='text-gray-700'>
-              Welcome to the Admin Dashboard. Use the sidebar to navigate.
-            </p>
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-4 lg:mt-6'>
-              <div className='bg-white p-6 rounded-lg shadow-md'>
-                <h2 className='text-lg font-bold'>Total Orders</h2>
-                <p className='text-2xl mt-4'>123</p>
+          <>
+            {loadindData && <Spinner sync={true} size={10} />}
+            {data && (
+              <div>
+                <p className='text-gray-700'>
+                  Welcome to the Admin Dashboard. Use the sidebar to navigate.
+                </p>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-4 lg:mt-6'>
+                  <div className='bg-white p-6 rounded-lg shadow-md'>
+                    <h2 className='text-lg font-bold'>
+                      Total Orders- {data.totalOrders}
+                    </h2>
+                    <h2 className='text-lg font-bold'>
+                      Paid Orders- {data.paidOrders}
+                    </h2>
+                    <h2 className='text-lg font-bold'>
+                      Delivered Orders- {data.deliveredOrders}
+                    </h2>
+                  </div>
+                  <div className='bg-white p-6 rounded-lg shadow-md'>
+                    <h2 className='text-lg font-bold'>
+                      Total Users-{data.totalUsers}
+                    </h2>
+                    <h2 className='text-lg font-bold'>
+                      Administrative Users-{data.adminUsers}
+                    </h2>
+                  </div>
+                  <div className='bg-white p-6 rounded-lg shadow-md'>
+                    <h2 className='text-lg font-bold'>Total Products</h2>
+                    <p className='text-2xl mt-4'>{data.totalProducts}</p>
+                  </div>
+                </div>
               </div>
-              <div className='bg-white p-6 rounded-lg shadow-md'>
-                <h2 className='text-lg font-bold'>Total Users</h2>
-                <p className='text-2xl mt-4'>57</p>
-              </div>
-              <div className='bg-white p-6 rounded-lg shadow-md'>
-                <h2 className='text-lg font-bold'>Total Products</h2>
-                <p className='text-2xl mt-4'>42</p>
-              </div>
-            </div>
-          </div>
+            )}
+          </>
         )}
 
         {activeTab === 'orders' && <Orders />}
