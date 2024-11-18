@@ -65,7 +65,7 @@ function RegisterPage() {
       toast.success(
         `Welcome to CESOL3NERGY, ${res.firstName} ${res.lastName}!`
       );
-      router.push(`/profile/${res._id}`);
+      router.push(`/profile`);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
