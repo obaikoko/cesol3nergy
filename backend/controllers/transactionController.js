@@ -5,6 +5,7 @@ const createTransaction = asyncHandler(async (req, res) => {
   const params = JSON.stringify({
     email: req.body.email, // Use email from request body
     amount: req.body.amount * 100, // Convert amount to kobo (Naira x 100)
+    callback_url: process.env.PAYSTACK_CALLBACK_URL,
   });
 
   const options = {
@@ -55,34 +56,61 @@ const createTransaction = asyncHandler(async (req, res) => {
   paystackReq.end();
 });
 
-const confirmTransaction = asyncHandler ( async (req, res) => {
 
-const options = {
-  hostname: 'api.paystack.co',
-  port: 443,
-  path: '/transaction/verify/:id',
-  method: 'GET',
-  headers: {
-    Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-  },
-};
+const confirmTransaction = asyncHandler(async (req, res) => {
+  const reference = req.params.reference; // Extract reference from the route parameter
 
-https
-  .request(options, (res) => {
-    let data = '';
+  const options = {
+    hostname: 'api.paystack.co',
+    port: 443,
+    path: `/transaction/verify/${reference}`,
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`, // Use your Paystack secret key
+    },
+  };
 
-    res.on('data', (chunk) => {
-      data += chunk;
-    });
+  https
+    .request(options, (paystackRes) => {
+      let data = '';
 
-    res.on('end', () => {
-      console.log(JSON.parse(data));
-    });
-  })
-  .on('error', (error) => {
-    console.error(error);
-  });
-})
+      paystackRes.on('data', (chunk) => {
+        data += chunk;
+      });
 
+      paystackRes.on('end', () => {
+        const response = JSON.parse(data);
+
+        if (response.status && response.data.status === 'success') {
+          // Validate the amount paid
+          if (response.data.amount === req.body.amount * 100) {
+            res.status(200).json({
+              success: true,
+              message: 'Payment verified successfully',
+              data: response.data,
+            });
+          } else {
+            res.status(400).json({
+              success: false,
+              message: 'Payment amount mismatch',
+            });
+          }
+        } else {
+          res.status(400).json({
+            success: false,
+            message: response.message || 'Verification failed',
+          });
+        }
+      });
+    })
+    .on('error', (error) => {
+      console.error(error);
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+      });
+    })
+    .end();
+});
 
 export { createTransaction, confirmTransaction };

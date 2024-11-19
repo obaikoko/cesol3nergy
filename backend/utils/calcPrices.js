@@ -16,7 +16,7 @@ export function calcPrices(orderItems) {
   );
 
   // Calculate the shipping price
-  const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  const shippingPrice = itemsPrice > 100 ? 0 : 0;
 
   // Calculate the total price
   const totalPrice = itemsPrice + shippingPrice ;
@@ -24,7 +24,7 @@ export function calcPrices(orderItems) {
   // return prices as strings fixed to 2 decimal places
   return {
     itemsPrice: addDecimals(itemsPrice),
-    shippingPrice: addDecimals(shippingPrice),
+    // shippingPrice: addDecimals(shippingPrice),
     totalPrice: addDecimals(totalPrice),
   };
 }

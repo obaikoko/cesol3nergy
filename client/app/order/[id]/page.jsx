@@ -122,7 +122,7 @@ const OrderDetailsPage = () => {
 
               {/* Actions */}
               <div className='flex justify-end space-x-4'>
-                <PaystackPayment />
+                <PaystackPayment order={order} />
                 <button className='bg-gray-200 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors'>
                   Back to Orders
                 </button>

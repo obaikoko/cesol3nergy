@@ -9,6 +9,7 @@ import store from '../src/app/store';
 import { Provider, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { hydrateCart } from '../src/slices/cartSlice';
+import Head from 'next/head';
 
 function RootProvider({ children }) {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ function RootProvider({ children }) {
 
   return (
     <>
+      <Head>
+        <script src='https://js.paystack.co/v1/inline.js' async></script>
+      </Head>
       {children}
       <ToastContainer />
     </>
