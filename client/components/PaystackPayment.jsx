@@ -1,13 +1,8 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useCreateTransactionMutation } from '@/src/slices/transactionSlice';
-// import { useSelector } from 'react-redux';
 
 const PaystackPayment = ({ order }) => {
-  // const { user } = useSelector((state) => state.auth);
-  // const { cart } = useSelector((state) => state.cart);
-  // console.log(order);
-
   const router = useRouter();
   const [createTransaction, { isLoading, isError }] =
     useCreateTransactionMutation();
@@ -18,6 +13,7 @@ const PaystackPayment = ({ order }) => {
       const res = await createTransaction({
         email: order.user.email,
         amount: order.totalPrice,
+        orderId: order._id,
       }).unwrap();
       router.push(`${res.data.authorization_url}`);
       console.log(res);
