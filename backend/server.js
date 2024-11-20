@@ -38,11 +38,14 @@ app.post('/api/verify-payment', async (req, res) => {
   const { reference } = req.body;
 
   try {
-    const response = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`, {
-      headers: {
-        Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
-      },
-    });
+    const response = await axios.get(
+      `https://api.paystack.co/transaction/verify/${reference}`,
+      {
+        headers: {
+          Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+        },
+      }
+    );
 
     if (response.data.status && response.data.data.status === 'success') {
       // Payment was successful
