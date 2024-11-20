@@ -5,6 +5,8 @@ import Spinner from '@/components/Spinner';
 import { useGetOrderDetailsQuery } from '@/src/slices/orderApiSlice';
 import { useParams } from 'next/navigation';
 import PaystackPayment from '@/components/PaystackPayment';
+import { formatDateTime } from '@/utils';
+import Link from 'next/link';
 
 const OrderDetailsPage = () => {
   const { id } = useParams();
@@ -44,7 +46,8 @@ const OrderDetailsPage = () => {
                 </p>
                 <p>
                   <strong>Order Date:</strong>{' '}
-                  {order.createdAt.substring(0, 10)}
+                  {formatDateTime(order.createdAt)}
+                 
                 </p>
                 <p>
                   <strong>Total Amount:</strong> &#8358;
@@ -54,6 +57,12 @@ const OrderDetailsPage = () => {
                   <strong>Payment Status:</strong>{' '}
                   {order.isPaid ? 'Paid' : 'Not Paid'}
                 </p>
+                {order.isPaid && (
+                  <p>
+                    <strong>Payment Date:</strong> {formatDateTime(order.paidAt)}
+                  </p>
+                )}
+
                 <p>
                   <strong>Delivery Status:</strong>{' '}
                   {order.isDelivered ? 'Delivered' : 'Not Delivered'}
@@ -123,9 +132,9 @@ const OrderDetailsPage = () => {
               {/* Actions */}
               <div className='flex justify-end space-x-4'>
                 <PaystackPayment order={order} />
-                <button className='bg-gray-200 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors'>
-                  Back to Orders
-                </button>
+                <Link href='/profile' className='bg-gray-200 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors'>
+                  Back to Profile
+                </Link>
               </div>
             </div>
           </div>

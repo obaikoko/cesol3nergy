@@ -24,12 +24,14 @@ const PaystackPayment = ({ order }) => {
 
   return (
     <div>
-      <button
-        onClick={handlePayment}
-        className='bg-purple-500 rounded p-2 text-white'
-      >
-        {isLoading ? 'processing' : 'Pay now'}
-      </button>
+      {!order.isPaid && (
+        <button
+          onClick={handlePayment}
+          className='bg-purple-500 rounded p-2 text-white'
+        >
+          {isLoading ? 'processing...' : 'Pay now'}
+        </button>
+      )}
     </div>
   );
 };
