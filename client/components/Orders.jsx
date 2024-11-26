@@ -35,7 +35,7 @@ const Orders = () => {
                 <tr key={order._id} className='border-b'>
                   <td className='py-3 px-4'>{order._id}</td>
                   <td className='py-3 px-4'>
-                    {order.user.firstName} {order.user.lastName}
+                    {order.user?.firstName} {order.user?.lastName}
                   </td>
                   <td className='py-3 px-4'>
                     &#8358;{order.totalPrice.toLocaleString()}

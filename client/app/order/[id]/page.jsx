@@ -75,14 +75,14 @@ const OrderDetailsPage = () => {
                   Customer Information
                 </h3>
                 <p>
-                  <strong>Name:</strong> {order.user.firstName}{' '}
-                  {order.user.lastName}
+                  <strong>Name:</strong> {order.user?.firstName}{' '}
+                  {order.user?.lastName}
                 </p>
                 <p>
-                  <strong>Email:</strong> {order.user.email}
+                  <strong>Email:</strong> {order.user?.email}
                 </p>
                 <p>
-                  <strong>Phone:</strong> {order.user.phone}
+                  <strong>Phone:</strong> {order.user?.phone}
                 </p>
                 <p>
                   <strong>Delivery Address:</strong>{' '}
