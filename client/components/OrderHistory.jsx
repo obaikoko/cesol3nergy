@@ -30,7 +30,7 @@ const OrderHistory = ({ orders }) => {
                     {order.isPaid ? 'Paid' : 'Not Paid'}
                   </td>
                   <td className='py-3 px-4'>
-                    {order.isPaidisDelivered ? 'Delivered' : 'Not Delivered'}
+                    {order.isDelivered ? 'Delivered' : 'Not Delivered'}
                   </td>
                   <td className='py-3 px-4'>
                     <Link

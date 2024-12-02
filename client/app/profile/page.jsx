@@ -13,13 +13,19 @@ import { useGetMyOrdersQuery } from '@/src/slices/orderApiSlice';
 
 const ProfilePage = () => {
   const router = useRouter();
+  const {user} = useSelector(state => state.auth)
 
   const [isLoggedIn, setIsLogged] = useState('');
 
   const { data: profile, isLoading } = useGetProfileQuery();
   const { data: orders } = useGetMyOrdersQuery();
+ 
+  
 
   useEffect(() => {
+    if (!user) {
+      router.push('/login')
+    }
     setIsLogged(profile);
   }, [profile]);
   if (isLoading) {
