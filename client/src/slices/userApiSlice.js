@@ -12,10 +12,18 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    verifyEmail: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/verify-email`,
+        method: 'POST',
+        body: data,
+        credentials: 'include',
+      }),
+    }),
     register: builder.mutation({
       query: (data) => ({
-        url: `${USERS_URL}`,
-        method: 'POST',
+        url: `${USERS_URL}/create/${data.token}`,
+        method: 'PUT',
         body: data,
         credentials: 'include',
       }),
@@ -104,6 +112,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 export const {
   useLoginMutation,
   useLogoutMutation,
+  useVerifyEmailMutation,
   useRegisterMutation,
   useProfileMutation,
   useGetUsersQuery,

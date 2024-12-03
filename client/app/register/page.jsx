@@ -8,30 +8,27 @@ import { toast } from 'react-toastify';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { useSearchParams } from 'next/navigation';
 
 function RegisterPage() {
+  const searchParams = useSearchParams();
+
+  const token = searchParams.get('token');
+
   const dispatch = useDispatch();
   const router = useRouter();
 
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: '',
     phone: '',
     address: '',
     password: '',
     confirmPassword: '',
   });
 
-  const {
-    firstName,
-    lastName,
-    email,
-    phone,
-    address,
-    password,
-    confirmPassword,
-  } = formData;
+  const { firstName, lastName, phone, address, password, confirmPassword } =
+    formData;
 
   const [register, { isLoading }] = useRegisterMutation();
 
@@ -53,9 +50,9 @@ function RegisterPage() {
 
     try {
       const res = await register({
+        token,
         firstName,
         lastName,
-        email,
         phone,
         address,
         password,
@@ -77,7 +74,7 @@ function RegisterPage() {
       <div className='min-h-screen flex flex-col justify-center bg-purple-100'>
         <div className='flex items-center justify-center'>
           <form
-            className='bg-white p-10 rounded-lg shadow-lg max-w-md w-full'
+            className='bg-white my-4 p-10 rounded-lg shadow-lg max-w-md w-full'
             onSubmit={handleSubmit}
           >
             <div className='flex flex-col items-center mb-6'>
@@ -116,23 +113,6 @@ function RegisterPage() {
                 name='lastName'
                 id='lastName'
                 value={lastName}
-                onChange={handleInputChange}
-                className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-950'
-              />
-            </div>
-
-            <div className='mb-4 w-full'>
-              <label
-                htmlFor='email'
-                className='block text-purple-950 font-bold mb-2'
-              >
-                Email
-              </label>
-              <input
-                type='email'
-                name='email'
-                id='email'
-                value={email}
                 onChange={handleInputChange}
                 className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-950'
               />
@@ -208,18 +188,10 @@ function RegisterPage() {
               type='submit'
               className='w-full bg-gradient-to-r from-purple-700 to-orange-500 text-white py-2 rounded-md hover:bg-purple-900 transition-colors'
             >
-              {isLoading ? 'Creating Account...' : 'Sign Up'}
+              {isLoading ? 'Creating Account...' : 'Submit'}
             </button>
 
-            <div className='mt-6 flex flex-col items-center'>
-              <p className='text-gray-600'>Already have an account?</p>
-              <Link
-                href='/login'
-                className='text-purple-950 hover:underline mt-2'
-              >
-                Sign In
-              </Link>
-            </div>
+        
           </form>
         </div>
       </div>

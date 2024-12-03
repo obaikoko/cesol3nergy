@@ -2,6 +2,7 @@ import asyncHandler from '../middleware/asyncHandler.js';
 import Order from '../models/orderModel.js';
 import Product from '../models/productModel.js';
 import { calcPrices } from '../utils/calcPrices.js';
+import { sendSingleMail } from '../utils/emailService.js';
 
 // @desc Create new Order
 // @route OOST /api/orders
@@ -53,7 +54,8 @@ const addOrderItems = asyncHandler(async (req, res) => {
     });
 
     const createdOrder = await order.save();
-
+    
+sendSingleMail({email: req.user.email, text:'you have made an order'})
     res.status(201).json(createdOrder);
   }
 });

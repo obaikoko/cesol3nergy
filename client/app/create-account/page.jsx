@@ -1,28 +1,19 @@
 'use client';
-import { Suspense, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useLoginMutation } from '@/src/slices/userApiSlice';
-import { setCredentials } from '@/src/slices/authSlice';
-import { useRouter, useSearchParams } from 'next/navigation';
+
 import { toast } from 'react-toastify';
 import Link from 'next/link';
-import Spinner from '@/components/Spinner';
-import { FaUserCircle } from 'react-icons/fa';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { useState } from 'react';
+import { useVerifyEmailMutation } from '@/src/slices/userApiSlice';
 
-const LoginPage = () => {
-  const dispatch = useDispatch();
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect') || '/';
+const page = () => {
+  const [verifyEmail, { isLoading, isError }] = useVerifyEmailMutation();
 
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
   });
-  const { email, password } = formData;
-  const [login, { isLoading }] = useLoginMutation();
-  const router = useRouter();
+  const { email } = formData;
 
   const handleInputChange = (e) => {
     setFormData((prevState) => ({
@@ -35,20 +26,12 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const res = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...res }));
-
-      toast.success(`Welcome ${res.firstName} ${res.lastName}`);
-      if (res.isAdmin) {
-        router.push(`/dashboard`);
-      } else {
-        router.push(redirect);
-      }
+      const res = await verifyEmail({ email }).unwrap();
+      toast.success(res.message);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
   };
-
   return (
     <div>
       <Navbar />
@@ -62,7 +45,7 @@ const LoginPage = () => {
               <h1 className='text-3xl font-bold text-purple-950 mb-4'>
                 Cesol3nergy
               </h1>
-              <h1>SIGN IN</h1>
+              <h1>CREATE ACCOUNT</h1>
             </div>
 
             <div className='mb-4 w-full'>
@@ -75,25 +58,9 @@ const LoginPage = () => {
               <input
                 type='email'
                 name='email'
+                placeholder='Please add a valid email address'
                 id='email'
                 value={email}
-                onChange={handleInputChange}
-                className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-950'
-              />
-            </div>
-
-            <div className='mb-6 w-full'>
-              <label
-                htmlFor='password'
-                className='block text-purple-950 font-bold mb-2'
-              >
-                Password
-              </label>
-              <input
-                type='password'
-                name='password'
-                id='password'
-                value={password}
                 onChange={handleInputChange}
                 className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-950'
               />
@@ -103,23 +70,18 @@ const LoginPage = () => {
               type='submit'
               className='w-full bg-gradient-to-r from-purple-700 to-orange-500 text-white py-2 rounded-md hover:bg-purple-900 transition-colors'
             >
-              {isLoading ? 'Authenticating...' : 'Login'}
+              {isLoading ? 'processing...' : 'submit'}
             </button>
 
             <div className='mt-6 flex flex-col items-center'>
-              <p className='text-gray-600'>Don't have an account?</p>
+              <p className='text-gray-600'>Already have an account?</p>
               <Link
-                href='/create-account'
+                href='/login'
                 className='text-purple-950 hover:underline mt-2'
               >
-                Create Account
+               Login
               </Link>
-              <Link
-                href='/forget-password'
-                className='text-purple-950 hover:underline mt-2'
-              >
-                Forgotten password?
-              </Link>
+             
             </div>
           </form>
         </div>
@@ -129,12 +91,4 @@ const LoginPage = () => {
   );
 };
 
-const Login = () => {
-  return (
-    <Suspense fallback={<Spinner clip={true} size={150} />}>
-      <LoginPage />
-    </Suspense>
-  );
-};
-
-export default Login;
+export default page;
