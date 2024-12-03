@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRegisterMutation } from '@/src/slices/userApiSlice';
 import { setCredentials } from '@/src/slices/authSlice';
@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useSearchParams } from 'next/navigation';
+import Spinner from '@/components/Spinner';
 
 function RegisterPage() {
   const searchParams = useSearchParams();
@@ -200,4 +201,13 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+
+const Register = () => {
+  return (
+    <Suspense fallback={<Spinner clip={true} size={150} />}>
+      <RegisterPage />
+    </Suspense>
+  );
+};
+
+export default Register;
