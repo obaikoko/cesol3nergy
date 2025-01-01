@@ -1,19 +1,19 @@
-// components/Footer.js
 'use client';
 
-import { useSpring, animated } from '@react-spring/web';
 import Link from 'next/link';
-import {FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaWhatsapp} from 'react-icons/fa'
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+  FaWhatsapp,
+} from 'react-icons/fa';
 
 const Footer = () => {
-  const fadeIn = useSpring({ opacity: 1, from: { opacity: 0 }, delay: 200 });
-
   return (
     <footer className='bg-gray-800 text-white py-10'>
       <div className='container mx-auto px-6'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-          {/* Company Info */}
-
           <div>
             <h4 className='text-lg font-bold mb-4'>CESOL3NERGY</h4>
             <p className='mb-2'>
@@ -52,35 +52,35 @@ const Footer = () => {
           {/* Contact Info */}
           <div>
             <h4 className='text-lg font-bold mb-4'>Contact Us</h4>
-            <p className='mb-2'>Email: support@cesoleenergy.com</p>
+            <p className='mb-2'>Email: cesol3nergy@gmail.com</p>
             <p>Phone: (+234) 906 699 6674</p>
             <div className='flex space-x-4 mt-4'>
               <Link
-                href='#'
+                href='https://www.facebook.com/share/15a4sSFtNc/?mibextid=JRoKGi'
                 className='text-gray-400 hover:text-white transition-colors duration-300'
               >
                 <FaFacebook />
               </Link>
               <Link
-                href='#'
+                href='https://api.whatsapp.com/send?phone=08146797467&text=thank you for contacting Cesol3nery! how can we assist you?'
                 className='text-gray-400 hover:text-white transition-colors duration-300'
               >
                 <FaWhatsapp />
               </Link>
               <Link
-                href='#'
+                href='https://www.instagram.com/cesol3nergy/profilecard/?igsh=dnR5ZzV2OWc4NGk3'
                 className='text-gray-400 hover:text-white transition-colors duration-300'
               >
                 <FaInstagram />
               </Link>
               <Link
-                href='#'
+                href='https://www.linkedin.com/in/chizaram-okoye-a89507238'
                 className='text-gray-400 hover:text-white transition-colors duration-300'
               >
                 <FaLinkedin />
               </Link>
               <Link
-                href='#'
+                href='https://x.com/benjami81230393?s=11'
                 className='text-gray-400 hover:text-white transition-colors duration-300'
               >
                 <FaTwitter />

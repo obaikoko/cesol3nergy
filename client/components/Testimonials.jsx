@@ -40,13 +40,13 @@ export default function Testimonials() {
   const slideIn = useSpring({
     opacity: 1,
     transform: 'translateX(0)',
-    from: { opacity: 0, transform: 'translateX(50px)' },
+    from: { opacity: 0, transform: 'translateX(10px)' },
     reset: true,
     config: { duration: 500 }, // animation duration for smooth transition
   });
 
   return (
-    <section className='py-20 bg-gradient-to-br from-gray-100 to-gray-200'>
+    <section className='py-20 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden'>
       <div className='container mx-auto text-center'>
         <h2 className='text-3xl font-bold text-purple-800 mb-8'>
           Testimonials
@@ -55,7 +55,7 @@ export default function Testimonials() {
           <animated.div
             style={slideIn}
             key={index}
-            className='p-8 bg-white shadow-lg rounded-lg'
+            className='p-8 bg-white shadow-lg rounded-lg w-full max-w-sm mx-auto'
           >
             <img
               src={testimonials[index].image}

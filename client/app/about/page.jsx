@@ -6,11 +6,15 @@ import Navbar from '@/components/Navbar';
 import { useSpring, animated } from '@react-spring/web';
 
 const teamMembers = [
-  { name: 'Jane Doe', title: 'CEO', image: '/images/customer2.jpg' },
   {
-    name: 'John Smith',
+    name: 'Okoye Benjamin ',
+    title: 'CEO',
+    image: '/images/ceo.jpg',
+  },
+  {
+    name: 'Jesse Obinna',
     title: 'Chief Engineer',
-    image: '/images/customer1.jpg',
+    image: '/images/engineer.jpg',
   },
   {
     name: 'Emily Nguyen',
@@ -122,7 +126,7 @@ export default function AboutUs() {
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
