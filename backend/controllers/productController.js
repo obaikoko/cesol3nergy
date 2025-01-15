@@ -74,7 +74,7 @@ const createProduct = asyncHandler(async (req, res) => {
 const updateProduct = asyncHandler(async (req, res) => {
   const { name, price, description, image, brand, category, countInStock } =
     req.body;
- 
+
   const product = await Product.findById(req.params.id);
 
   if (product) {
@@ -96,7 +96,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         };
       } else {
         const uploadedResponse = await cloudinary.uploader.upload(image, {
-          folder: 'products',
+          folder: 'cesol3nergy/products',
         });
         product.image = {
           url: uploadedResponse.url,

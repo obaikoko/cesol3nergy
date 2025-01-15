@@ -62,7 +62,7 @@ const Footer = () => {
                 <FaFacebook />
               </Link>
               <Link
-                href='https://api.whatsapp.com/send?phone=08146797467&text=thank you for contacting Cesol3nery! how can we assist you?'
+                href='https://api.whatsapp.com/send?phone=09066996674&text=thank you for contacting Cesol3nery! how can we assist you?'
                 className='text-gray-400 hover:text-white transition-colors duration-300'
               >
                 <FaWhatsapp />

@@ -153,13 +153,13 @@ const ContactUs = () => {
               <div className='text-center md:text-left'>
                 <h3 className='text-2xl font-semibold'>Our Location</h3>
                 <p className='text-gray-600'>
-                  456 Solar Avenue, Lagos, Nigeria
+                  F1647, F-LINE Alaba International Market, Ojo Lagos Nigeria.
                 </p>
                 <p className='text-gray-600'>Phone: (+234) 906 699 6674</p>
               </div>
 
               {/* Map Integration */}
-              <div className='rounded-lg overflow-hidden shadow-md'>
+              {/* <div className='rounded-lg overflow-hidden shadow-md'>
                 <iframe
                   src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15761.949497222933!2d3.3792057!3d6.5243792!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b0f0c3d1c9d%3A0x7f0135762d4d3d5!2sLagos%2C%20Nigeria!5e0!3m2!1sen!2sng!4v1698773248415'
                   width='100%'
@@ -169,7 +169,7 @@ const ContactUs = () => {
                   aria-hidden='false'
                   tabIndex='0'
                 ></iframe>
-              </div>
+              </div> */}
 
               {/* Social Media Links */}
               <div className='flex justify-center md:justify-start space-x-4 mt-4'>
@@ -181,7 +181,7 @@ const ContactUs = () => {
                   <FaFacebook className='text-2xl' />
                 </Link>
                 <Link
-                  href='https://api.whatsapp.com/send?phone=08146797467&text=thank you for contacting Cesol3nery! how can we assist you?'
+                  href='https://api.whatsapp.com/send?phone=09066996674&text=thank you for contacting Cesol3nery! how can we assist you?'
                   aria-label='Visit our Facebook page'
                   className='text-purple-800'
                 >

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const Products = ({data}) => {
+const Products = ({ data }) => {
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
       {data &&
@@ -17,7 +17,9 @@ const Products = ({data}) => {
               <p className='text-gray-600 mt-2 line-clamp-3'>
                 {product.description}
               </p>
-              <p className='text-purple-600 mt-2'>&#8358;{product.price?.toLocaleString()}</p>
+              <p className='text-purple-600 mt-2'>
+                &#8358;{product.price?.toLocaleString()}
+              </p>
             </div>
           </Link>
         ))}

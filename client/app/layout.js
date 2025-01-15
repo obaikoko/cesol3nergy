@@ -10,6 +10,7 @@ import { Provider, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { hydrateCart } from '../src/slices/cartSlice';
 import Head from 'next/head';
+import InactivityHandler from '@/components/InactivityHandler';
 
 function RootProvider({ children }) {
   const dispatch = useDispatch();
@@ -35,9 +36,10 @@ function RootProvider({ children }) {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <body>
         <Provider store={store}>
+          <InactivityHandler timeoutDuration={15 * 60 * 1000} />
           <RootProvider>{children}</RootProvider>
         </Provider>
       </body>

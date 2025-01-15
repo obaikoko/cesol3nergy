@@ -12,15 +12,14 @@ import React from 'react';
 const page = () => {
   return (
     <div>
-      <Navbar/>
-  
+      <Navbar />
       <HeroSection />
       <CoreOfferings />
       <FeaturedProducts />
       <Testimonials />
       <BlogSection />
       <WhyChooseUs />
-      <Footer/>
+      <Footer />
     </div>
   );
 };

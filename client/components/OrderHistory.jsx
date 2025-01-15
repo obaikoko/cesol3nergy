@@ -4,7 +4,7 @@ import Link from 'next/link';
 const OrderHistory = ({ orders }) => {
   return (
     <div className='overflow-x-hidden p-4'>
-      <h2 className='text-xl font-semibold mb-4'>Ordered History</h2>
+      <h2 className='text-xl font-semibold mb-4'>Order History</h2>
       <div className=' overflow-x-auto'>
         <table className='w-full bg-white shadow-md rounded-lg'>
           <thead>
@@ -16,7 +16,9 @@ const OrderHistory = ({ orders }) => {
               <th className='py-3 px-4 text-left'>Actions</th>
             </tr>
           </thead>
-
+          {orders && orders.length === 0 && (
+            <p className='my-4'>You have no ordered items</p>
+          )}
           {orders && (
             <tbody>
               {orders.map((order) => (

@@ -1,3 +1,4 @@
+import cloudinary from '../config/cloudinary.js';
 import asyncHandler from '../middleware/asyncHandler.js';
 import User from '../models/userModel.js';
 import { sendSingleMail } from '../utils/emailService.js';
@@ -98,11 +99,24 @@ const verifyEmail = asyncHandler(async (req, res) => {
 // privacy Public
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, phone, address, password } = req.body;
+
   if (!firstName || !lastName || !phone || !address || !password) {
     res.status(400);
-    throw new Error('Please add all field');
+    throw new Error('Please add all fields');
   }
+
   const { token } = req.params;
+
+  // Strong password regex
+  const strongPasswordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+  if (!strongPasswordRegex.test(password)) {
+    res.status(400);
+    throw new Error(
+      'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.'
+    );
+  }
 
   // Find the user with the token
   const user = await User.findOne({ verificationToken: token });
@@ -111,16 +125,34 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('Invalid or expired token.');
   }
 
+  // Update user details
   user.firstName = firstName;
   user.lastName = lastName;
   user.phone = phone;
   user.address = address;
-  user.password = password;
+  user.password = password; // Assuming password hashing is handled by a pre-save hook in your User model.
   user.isVerified = true;
   user.verificationToken = null; // Clear the token
-  await user.save();
-  generateToken(res, user._id);
 
+  await user.save();
+
+  // Generate a token and send a welcome email
+  generateToken(res, user._id);
+  sendSingleMail({
+    email: user.email,
+    subject: 'Welcome to Cesol3nery!',
+    text: `
+Dear ${user.firstName || 'User'}, 
+
+Congratulations on successfully registering on Cesol3nery! We're thrilled to have you as part of our community.
+Explore the platform, discover amazing features, and start your journey with us today.
+If you have any questions or need support, feel free to contact us at cesol3nery@gmail.com
+
+Thank you for choosing Cesol3nery!
+    `,
+  });
+
+  // Respond with the updated user details
   res.status(200);
   res.json({
     _id: user._id,
@@ -158,6 +190,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       email: user.email,
       address: user.address,
       phone: user.phone,
+      image: user.image,
       isAdmin: user.isAdmin,
     });
   }
@@ -167,13 +200,44 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @Route PUT /api/users/
 // privacy Private
 const updateUserProfile = asyncHandler(async (req, res) => {
+  const { firstName, lastName, phone, address, image } = req.body;
   const user = await User.findById(req.user._id);
 
   if (user) {
-    user.firstName = req.body.firstName || user.firstName;
-    user.lastName = req.body.lastName || user.lastName;
-    user.phone = req.body.phone || user.phone;
-    user.address = req.body.address || user.address;
+    if (image) {
+      const existingImageId = user.image?.publicId || '';
+
+      if (existingImageId) {
+        const newImageId = existingImageId.substring(
+          existingImageId.indexOf('cesol3nergy/users') +
+            'cesol3nergy/users'.length
+        );
+
+        const uploadedResponse = await cloudinary.uploader.upload(image, {
+          folder: 'cesol3nergy/users',
+          public_id: newImageId,
+        });
+
+        user.image = {
+          url: uploadedResponse.url,
+          publicId: uploadedResponse.public_id,
+        };
+      } else {
+        const uploadedResponse = await cloudinary.uploader.upload(image, {
+          folder: 'cesol3nergy/users',
+        });
+
+        user.image = {
+          url: uploadedResponse.url,
+          publicId: uploadedResponse.public_id,
+        };
+      }
+    }
+
+    user.firstName = firstName || user.firstName;
+    user.lastName = lastName || user.lastName;
+    user.phone = phone || user.phone;
+    user.address = address || user.address;
     const updatedUser = await user.save();
 
     res.json({
@@ -193,7 +257,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 // @description This is to delete a user
 // @Route DELETE /api/users/:id
-// privacy Private
+// privacy Private Admin
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
@@ -201,6 +265,9 @@ const deleteUser = asyncHandler(async (req, res) => {
     if (user.isAdmin) {
       res.status(400);
       throw new Error('Can not delete admin user');
+    }
+    if (user.image.publicId) {
+      await cloudinary.uploader.destroy(user.image.publicId);
     }
     await User.deleteOne({ _id: user._id });
     res.json({ message: 'User removed' });
@@ -217,6 +284,9 @@ const deleteAccount = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
+    if (user.image.publicId) {
+      await cloudinary.uploader.destroy(user.image.publicId);
+    }
     await User.deleteOne({ _id: user._id });
     res.json({ message: 'User removed' });
   } else {
@@ -249,17 +319,25 @@ const getUserById = asyncHandler(async (req, res) => {
 
 // @description This is to update user
 // @Route POST /api/users/:id
-// privacy Private
+// privacy Private Admin
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
+  const { firstName, lastName, phone, address, image } = req.body;
 
   if (user) {
-    user.firstName = req.body.firstName || user.firstName;
-    user.lastName = req.body.lastName || user.firstName;
-    user.email = req.body.email || user.email;
-    user.phone = req.body.phone || user.phone;
-    user.address = req.body.address || user.address;
-    // user.isAdmin = Boolean(req.body.isAdmin);
+    if (image) {
+      const uploadedResponse = await cloudinary.uploader.upload(image, {
+        folder: 'cesol3nergy/users',
+      });
+      user.image = {
+        url: uploadedResponse.url,
+        publicId: uploadedResponse.public_id,
+      };
+    }
+    user.firstName = firstName || user.firstName;
+    user.lastName = lastName || user.firstName;
+    user.phone = phone || user.phone;
+    user.address = address || user.address;
 
     const updatedUser = await user.save();
 
@@ -270,6 +348,7 @@ const updateUser = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       phone: updatedUser.phone,
       address: updatedUser.address,
+      image: updatedUser.image,
       isAdmin: updatedUser.isAdmin,
     });
   } else {

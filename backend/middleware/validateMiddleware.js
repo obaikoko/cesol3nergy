@@ -17,8 +17,8 @@ const validateData = [
   body('msg')
     .isLength({ min: 1 })
     .withMessage('Message  is required')
-    .matches(/^[a-zA-Z\s]+$/)
-    .withMessage('Message should only contain letters and spaces'),
+    .matches(/^[a-zA-Z0-9\s]+$/)
+    .withMessage('Message should only contain letters, numbers and spaces'),
 
   body('email').optional().isEmail().withMessage('Invalid email format'),
 

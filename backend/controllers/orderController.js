@@ -23,7 +23,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
     const itemsFromDB = await Product.find({
       _id: { $in: orderItems.map((x) => x._id) },
     });
-    
 
     // map over the order items and use the price from our items from database
     const dbOrderItems = orderItems.map((itemFromClient) => {
@@ -54,8 +53,28 @@ const addOrderItems = asyncHandler(async (req, res) => {
     });
 
     const createdOrder = await order.save();
-    
-sendSingleMail({email: req.user.email, text:'you have made an order'})
+
+    sendSingleMail({
+      email: req.user.email,
+      subject: 'Order Confirmation - Thank You for Your Purchase!',
+      text: `
+Dear ${req.user.firstName || 'Valued Customer'},
+
+Thank you for your order on Cesol3nery! We’re excited to let you know that your order has been successfully placed.
+
+### Order Details:
+- **Order Id:** ${createdOrder._id || 'N/A'}
+- **Order Date:** ${new Date().toLocaleDateString()}
+- **Total Amount:**  ${createdOrder.totalPrice.toLocaleString() || 'N/A'} Naira
+
+Your order is currently being processed, and we’ll notify you once it’s ready for shipment.
+
+If you have any questions or need assistance, please don't hesitate to reach out to our support team 
+
+Thank you for choosing Cesol3nery. We look forward to serving you again!
+  `,
+    });
+
     res.status(201).json(createdOrder);
   }
 });
