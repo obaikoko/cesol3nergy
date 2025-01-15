@@ -26,6 +26,46 @@ function RootProvider({ children }) {
   return (
     <>
       <Head>
+        {/* Static Metadata */}
+        <title>Cesol3nergy - Solar Products & Renewable Energy Solutions</title>
+        <meta
+          name='description'
+          content='Cesol3nergy offers premium solar panels, inverters, batteries, and renewable energy solutions. Empower your home or business with clean energy today!'
+        />
+        <meta
+          name='keywords'
+          content='solar products, renewable energy, solar panels, solar inverters, solar batteries, clean energy, Cesol3nergy'
+        />
+        <meta name='author' content='Cesol3nergy' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta charSet='utf-8' />
+        <meta name='theme-color' content='#FFD700' />
+
+        <Head>
+          {/* Open Graph Metadata */}
+          <meta
+            property='og:image'
+            content='https://res.cloudinary.com/dqoiuy0oa/image/upload/v1731071602/IMG-20241024-WA0007_cybwwk.jpg' // Replace with your logo's path
+          />
+          <meta
+            property='og:image:alt'
+            content='Cesol3nergy - Renewable Energy Solutions Logo'
+          />
+          <meta property='og:image:width' content='1200' />
+          <meta property='og:image:height' content='630' />
+
+          {/* Twitter Metadata */}
+          <meta
+            name='twitter:image'
+            content='https://res.cloudinary.com/dqoiuy0oa/image/upload/v1731071602/IMG-20241024-WA0007_cybwwk.jpg' // Replace with your logo's path
+          />
+          <meta
+            name='twitter:image:alt'
+            content='Cesol3nergy - Renewable Energy Solutions Logo'
+          />
+        </Head>
+
+        {/* Paystack script */}
         <script src='https://js.paystack.co/v1/inline.js' async></script>
       </Head>
       {children}
