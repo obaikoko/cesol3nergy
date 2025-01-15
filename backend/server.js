@@ -19,7 +19,7 @@ connectDB();
 const app = express();
 const corsOptions = {
   origin: ['https://www.cesol3nergy.com', 'https://cesol3nergy.com'],
-  // origin: 'http://localhost:2000',
+  // origin: 'http://localhost:3000',
   credentials: true,
 };
 
