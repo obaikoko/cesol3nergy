@@ -6,7 +6,7 @@ import { FaTools, FaSolarPanel, FaUserTie, FaTruck } from 'react-icons/fa';
 
 const services = [
   {
-    title: 'Maintenance & Upgrade',
+    title: 'Maintenance',
     description: 'Reliable maintenance to ensure peak performance.',
     icon: <FaTools className='text-blue-700 text-4xl mx-auto mb-4' />,
   },

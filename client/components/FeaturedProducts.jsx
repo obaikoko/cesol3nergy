@@ -1,9 +1,3 @@
-// components/FeaturedProducts.js
-'use client';
-
-import { useSpring, animated } from '@react-spring/web';
-import { useEffect, useState } from 'react';
-
 const products = [
   {
     title: 'Portable Solar Generator',
@@ -32,10 +26,6 @@ const products = [
 ];
 
 export default function FeaturedProducts() {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => setIsMounted(true), []);
-
   return (
     <section className='py-20 bg-white'>
       <div className='container mx-auto text-center'>
@@ -44,15 +34,8 @@ export default function FeaturedProducts() {
         </h2>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
           {products.map((product, index) => (
-            <animated.div
+            <div
               key={index}
-              style={{
-                opacity: isMounted ? 1 : 0,
-                transform: isMounted ? 'translateY(0px)' : 'translateY(30px)',
-                transition: `opacity 0.5s ease ${
-                  index * 0.2
-                }s, transform 0.5s ease ${index * 0.2}s`,
-              }}
               className='bg-white border rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300'
             >
               <img
@@ -65,11 +48,8 @@ export default function FeaturedProducts() {
                   {product.title}
                 </h3>
                 <p className='text-gray-600 my-2'>{product.description}</p>
-                <p className='text-yellow-500 font-bold'>
-                  &#8358;{product.price}
-                </p>
               </div>
-            </animated.div>
+            </div>
           ))}
         </div>
       </div>
