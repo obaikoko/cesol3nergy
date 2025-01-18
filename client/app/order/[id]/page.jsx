@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import DeliveredBtn from '@/components/DeliveredBtn';
+import PaidBtn from '@/components/PaidBtn';
 
 const OrderDetailsPage = () => {
   const router = useRouter();
@@ -150,7 +151,10 @@ const OrderDetailsPage = () => {
               <div className='flex justify-end space-x-4'>
                 <PaystackPayment order={order} />
                 {user && user.isAdmin ? (
-                  <DeliveredBtn order={order} />
+                  <>
+                    <PaidBtn order={order} />
+                    <DeliveredBtn order={order} />
+                  </>
                 ) : (
                   <Link
                     href='/profile'

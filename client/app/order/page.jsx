@@ -33,7 +33,7 @@ const PlaceOrder = () => {
       dispatch(clearCartItems());
       router.push(`/order/${res._id}`);
     } catch (err) {
-      toast.error(err.data?.message || 'Error placing order');
+      toast.error( 'Sorry unable to place order at the moment please try again later');
     }
   };
 
@@ -107,7 +107,7 @@ const PlaceOrder = () => {
                 <span>Total</span>
                 <span>&#8358;{Number(cart.totalPrice).toLocaleString()}</span>
               </div>
-              {error && <p className='text-red-600'>{error.data.message}</p>}
+              {error && <p className='text-red-600'>Sorry unable to place order at the moment please try again later.</p>}
               <button
                 type='button'
                 onClick={placeOrderHandler}

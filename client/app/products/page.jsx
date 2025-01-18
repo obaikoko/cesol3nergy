@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-
 import { useGetProductsQuery } from '@/src/slices/productApiSlice';
 import Spinner from '@/components/Spinner';
 import SearchBox from '@/components/SearchBox';
@@ -9,8 +8,7 @@ import { debounce } from 'lodash';
 import Products from '@/components/Products';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-
-
+import { useSearchParams } from 'next/navigation';
 
 const ProductCategories = () => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +20,6 @@ const ProductCategories = () => {
   });
   const totalPages = data && data.pages;
 
-  
   useEffect(() => {
     setLoading(isLoading);
     if (isError) {

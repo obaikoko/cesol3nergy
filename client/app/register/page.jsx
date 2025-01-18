@@ -10,6 +10,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useSearchParams } from 'next/navigation';
 import Spinner from '@/components/Spinner';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 function RegisterPage() {
   const searchParams = useSearchParams();
@@ -18,6 +19,7 @@ function RegisterPage() {
 
   const dispatch = useDispatch();
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -151,7 +153,7 @@ function RegisterPage() {
               />
             </div>
 
-            <div className='mb-4 w-full'>
+            <div className='mb-6 w-full relative'>
               <label
                 htmlFor='password'
                 className='block text-purple-950 font-bold mb-2'
@@ -159,16 +161,26 @@ function RegisterPage() {
                 Password
               </label>
               <input
-                type='password'
+                type={showPassword ? 'text' : 'password'}
                 name='password'
                 id='password'
                 value={password}
                 onChange={handleInputChange}
                 className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-950'
               />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className='absolute right-4 top-10 cursor-pointer text-gray-600'
+              >
+                {showPassword ? (
+                  <AiFillEyeInvisible size={20} />
+                ) : (
+                  <AiFillEye size={20} />
+                )}
+              </span>
             </div>
 
-            <div className='mb-6 w-full'>
+            <div className='mb-6 w-full relative'>
               <label
                 htmlFor='confirmPassword'
                 className='block text-purple-950 font-bold mb-2'
@@ -176,13 +188,23 @@ function RegisterPage() {
                 Confirm Password
               </label>
               <input
-                type='password'
+                type={showPassword ? 'text' : 'password'}
                 name='confirmPassword'
                 id='confirmPassword'
                 value={confirmPassword}
                 onChange={handleInputChange}
                 className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-950'
               />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className='absolute right-4 top-10 cursor-pointer text-gray-600'
+              >
+                {showPassword ? (
+                  <AiFillEyeInvisible size={20} />
+                ) : (
+                  <AiFillEye size={20} />
+                )}
+              </span>
             </div>
 
             <button
@@ -191,8 +213,6 @@ function RegisterPage() {
             >
               {isLoading ? 'Creating Account...' : 'Submit'}
             </button>
-
-        
           </form>
         </div>
       </div>
@@ -200,7 +220,6 @@ function RegisterPage() {
     </>
   );
 }
-
 
 const Register = () => {
   return (

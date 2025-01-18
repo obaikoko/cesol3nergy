@@ -11,6 +11,7 @@ import Pagination from './Pagination';
 import { debounce } from 'lodash';
 import SearchBox from './SearchBox';
 import DeleteProductBtn from './DeleteProductBtn';
+import AdminProductSearch from './AdminSearchProducts';
 
 const ProductList = () => {
   const [page, setPage] = useState(1);
@@ -20,7 +21,7 @@ const ProductList = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  const totalPages = data?.pages || 1;
+  const totalPages = data?.totalPages || 1;
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation();
 
@@ -62,7 +63,7 @@ const ProductList = () => {
 
   return (
     <div className='p-4 md:p-6'>
-      <SearchBox />
+      {/* <AdminProductSearch /> */}
       <h2 className='text-xl font-semibold mb-4'>Product Management</h2>
       <button
         onClick={createProductHandler}

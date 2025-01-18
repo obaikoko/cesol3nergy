@@ -22,8 +22,8 @@ const page = () => {
     <div>
       <Navbar />
       <HeroSection />
-      <CoreOfferings />
       <FeaturedProducts />
+      <CoreOfferings />
       <Testimonials />
       <BlogSection />
       <WhyChooseUs />

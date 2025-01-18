@@ -8,10 +8,9 @@ import { toast } from 'react-toastify';
 import Link from 'next/link';
 import Spinner from '@/components/Spinner';
 import { FaUserCircle } from 'react-icons/fa';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-
-
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -22,6 +21,7 @@ const LoginPage = () => {
     email: '',
     password: '',
   });
+  const [showPassword, setShowPassword] = useState(false);
   const { email, password } = formData;
   const [login, { isLoading }] = useLoginMutation();
   const router = useRouter();
@@ -84,7 +84,7 @@ const LoginPage = () => {
               />
             </div>
 
-            <div className='mb-6 w-full'>
+            <div className='mb-6 w-full relative'>
               <label
                 htmlFor='password'
                 className='block text-purple-950 font-bold mb-2'
@@ -92,13 +92,23 @@ const LoginPage = () => {
                 Password
               </label>
               <input
-                type='password'
+                type={showPassword ? 'text' : 'password'}
                 name='password'
                 id='password'
                 value={password}
                 onChange={handleInputChange}
                 className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-950'
               />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className='absolute right-4 top-10 cursor-pointer text-gray-600'
+              >
+                {showPassword ? (
+                  <AiFillEyeInvisible size={20} />
+                ) : (
+                  <AiFillEye size={20} />
+                )}
+              </span>
             </div>
 
             <button

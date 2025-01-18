@@ -4,7 +4,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: (page) => ({
-        url: `${PRODUCTS_URL}?pageNumber=${page}`, // Removed extra closing brace
+        url: `${PRODUCTS_URL}?pageNumber=${page}`, 
       }),
       keepUnusedDataFor: 5,
       providesTags: ['Products'],
@@ -16,8 +16,8 @@ export const productApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
     searchProducts: builder.query({
-      query: ({ keyword, category }) => ({
-        url: `${PRODUCTS_URL}?keyword=${keyword}&category=${category}`,
+      query: ({ keyword, category, page }) => ({
+        url: `${PRODUCTS_URL}?keyword=${keyword}&category=${category}&pageNumber=${page}`,
       }),
       providesTags: ['Products'],
       keepUnusedDataFor: 5,

@@ -10,7 +10,7 @@ const categories = [
   'Accessories',
 ];
 
-const SearchBox = () => {
+const AdminProductSearch = () => {
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState(categories[0] || '');
   const router = useRouter();
@@ -68,4 +68,4 @@ const SearchBox = () => {
   );
 };
 
-export default SearchBox;
+export default AdminProductSearch;

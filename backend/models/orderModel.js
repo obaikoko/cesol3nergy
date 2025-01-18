@@ -7,6 +7,12 @@ const orderSchema = new mongoose.Schema(
       required: true,
       ref: 'User',
     },
+    firstName: {
+      type: String,
+    },
+    lastName: {
+      type: String,
+    },
     orderItems: [
       {
         name: {
@@ -92,7 +98,6 @@ const orderSchema = new mongoose.Schema(
     },
     transactionReference: {
       type: String,
-      unique: true,
     },
     paidAt: {
       type: Date,

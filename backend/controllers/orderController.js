@@ -44,6 +44,8 @@ const addOrderItems = asyncHandler(async (req, res) => {
     const order = new Order({
       orderItems: dbOrderItems,
       user: req.user._id,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
       shippingAddress,
       paymentMethod,
       itemsPrice,
@@ -84,6 +86,10 @@ Thank you for choosing Cesol3nery. We look forward to serving you again!
 // @privacy Private
 const getMyOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.user._id });
+  if (!orders) {
+    res.status(404);
+    throw new Error('No orders found');
+  }
   res.status(200);
   res.json(orders);
 });
@@ -110,33 +116,12 @@ const getOrderById = asyncHandler(async (req, res) => {
 // @route PUT /api/orders/:id/pay
 // @privacy Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
-  // NOTE: here we need to verify the payment was made to PayPal before marking
-  // the order as paid
-  const { verified, value } = await verifyPayPalPayment(req.body.id);
-  if (!verified) throw new Error('Payment not verified');
-
-  // check if this transaction has been used before
-  const isNewTransaction = await checkIfNewTransaction(Order, req.body.id);
-  if (!isNewTransaction) throw new Error('Transaction has been used before');
-
   const order = await Order.findById(req.params.id);
 
   if (order) {
-    // check the correct amount was paid
-    const paidCorrectAmount = order.totalPrice.toString() === value;
-    if (!paidCorrectAmount) throw new Error('Incorrect amount paid');
-
     order.isPaid = true;
     order.paidAt = Date.now();
-    order.paymentResult = {
-      id: req.body.id,
-      status: req.body.status,
-      update_time: req.body.update_time,
-      email_address: req.body.payer.email_address,
-    };
-
     const updatedOrder = await order.save();
-
     res.json(updatedOrder);
   } else {
     res.status(404);
@@ -167,11 +152,24 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 // @route GET /api/orders
 // @privacy Private/Admin
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({}).populate(
-    'user',
-    'id firstName lastName email'
-  );
-  res.json(orders);
+  const pageSize = 10;
+  const page = req.query.pageNumber || 1;
+  
+  
+  let query = {};
+
+  const count = await Order.countDocuments(query)
+  const orders = await Order.find({})
+    .populate('user', 'id firstName lastName email')
+    .sort({ createdAt: -1 })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  if (!orders) {
+    res.status(404);
+    throw new Error('No orders found');
+  }
+  res.status(200);
+  res.json({orders, totalPages: Math.ceil(count / pageSize)});
 });
 // @desc Get user  orders
 // @route GET /api/orders
