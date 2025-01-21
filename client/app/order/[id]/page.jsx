@@ -152,8 +152,16 @@ const OrderDetailsPage = () => {
                 <PaystackPayment order={order} />
                 {user && user.isAdmin ? (
                   <>
-                    <PaidBtn order={order} />
-                    <DeliveredBtn order={order} />
+                    {order.isPaid === 1 ? (
+                      <>
+                        <DeliveredBtn order={order} />
+                      </>
+                    ) : (
+                      <>
+                        <PaidBtn order={order} />
+                        <DeliveredBtn order={order} />
+                      </>
+                    )}
                   </>
                 ) : (
                   <Link
