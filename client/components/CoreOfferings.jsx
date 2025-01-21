@@ -8,7 +8,7 @@ import Services from './Services';
 
 const products = [
   {
-    title: 'Solar Power Staion',
+    title: 'Solar Power Station',
     description: 'Reliable power solutions on the go.',
   },
   {

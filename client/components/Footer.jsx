@@ -16,6 +16,7 @@ const Footer = () => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
           <div>
             <h4 className='text-lg font-bold mb-4'>CESOL3NERGY</h4>
+            <img src='/images/logo.jpg' className='w-full my-4' />
             <p className='mb-2'>
               Your trusted partner for clean solar energy solutions.
             </p>

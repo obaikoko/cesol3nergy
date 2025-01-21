@@ -179,15 +179,14 @@ const ProductEdit = () => {
             </div>
 
             <div className='flex flex-col'>
-              <label className='text-gray-600 font-medium'>Category</label>
-              <input
-                type='text'
-                placeholder='Enter category'
-                name='category'
-                value={category}
-                onChange={handleFormChange}
-                className='mt-1 px-3 py-2 border border-gray-300 rounded focus:ring-purple-500 focus:border-purple-500'
-              />
+              <select onChange={handleFormChange} name='category' id='category'>
+                <option value=''>Select Category</option>
+                <option value='Generators'>Generators</option>
+                <option value='Inverters'>Inverters</option>
+                <option value='Batteries'>Batteries</option>
+                <option value='Panels'>Panels</option>
+                <option value='Controllers'>Controllers</option>
+              </select>
             </div>
 
             <div className='flex flex-col'>

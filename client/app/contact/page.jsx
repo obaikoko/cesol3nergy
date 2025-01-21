@@ -14,7 +14,6 @@ import {
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-
 const ContactUs = () => {
   const [contact, { isLoading }] = useMakeContactMutation();
 
@@ -142,7 +141,7 @@ const ContactUs = () => {
                 className={`w-full py-3 ${
                   isLoading
                     ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-purple-600 to-orange-500 hover:bg-purple-800'
+                    : 'bg-purple-600 hover:bg-purple-800'
                 } text-white rounded transition duration-300`}
               >
                 {isLoading ? 'Submitting...' : 'Submit'}
@@ -158,19 +157,6 @@ const ContactUs = () => {
                 </p>
                 <p className='text-gray-600'>Phone: (+234) 906 699 6674</p>
               </div>
-
-              {/* Map Integration */}
-              {/* <div className='rounded-lg overflow-hidden shadow-md'>
-                <iframe
-                  src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15761.949497222933!2d3.3792057!3d6.5243792!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b0f0c3d1c9d%3A0x7f0135762d4d3d5!2sLagos%2C%20Nigeria!5e0!3m2!1sen!2sng!4v1698773248415'
-                  width='100%'
-                  height='250'
-                  frameBorder='0'
-                  allowFullScreen=''
-                  aria-hidden='false'
-                  tabIndex='0'
-                ></iframe>
-              </div> */}
 
               {/* Social Media Links */}
               <div className='flex justify-center md:justify-start space-x-4 mt-4'>

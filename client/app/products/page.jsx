@@ -18,7 +18,7 @@ const ProductCategories = () => {
   const { data, isLoading, isError, refetch } = useGetProductsQuery(page, {
     refetchOnMountOrArgChange: true,
   });
-  const totalPages = data && data.pages;
+  const totalPages = data && data.totalPages;
 
   useEffect(() => {
     setLoading(isLoading);

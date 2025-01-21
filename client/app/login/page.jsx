@@ -114,7 +114,7 @@ const LoginPage = () => {
             <button
               type='submit'
               disabled={isLoading}
-              className='w-full bg-gradient-to-r from-purple-700 to-orange-500 text-white py-2 rounded-md hover:bg-purple-900 transition-colors'
+              className='w-full bg-purple-700 text-white py-2 rounded-md hover:bg-purple-900 transition-colors'
             >
               {isLoading ? 'Authenticating...' : 'Login'}
             </button>

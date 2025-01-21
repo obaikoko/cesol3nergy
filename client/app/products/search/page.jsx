@@ -46,7 +46,7 @@ const SearchPage = () => {
       <p>
         Search Results for {category} {keyword}
       </p>
-      {loading && <Spinner clip={true} size={150} />}
+      {loading && <Spinner sync={true} size={10} />}
 
       {data && <Products data={data} />}
       <Pagination
