@@ -1,5 +1,6 @@
 import BlogSection from '@/components/BlogSection';
 import CoreOfferings from '@/components/CoreOfferings';
+// import FAQPage from '@/components/FAQ';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
@@ -23,8 +24,9 @@ const page = () => {
       <Navbar />
       <HeroSection />
       <FeaturedProducts />
-      <CoreOfferings />
-      <Testimonials />
+      {/* <CoreOfferings /> */}
+      {/* <FAQPage /> */}
+      {/* <Testimonials /> */}
       <BlogSection />
       <WhyChooseUs />
       <Footer />

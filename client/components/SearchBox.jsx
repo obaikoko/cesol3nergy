@@ -3,11 +3,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 const categories = [
   'All',
-  'Generators',
-  'Inverters',
-  'Batteries',
-  'Panels',
-  'Accessories',
+  'Basic Solutions',
+  'Standard Solutions',
+  'Adnvanced Solutions',
+  'Industrial Solutions',
 ];
 
 const SearchBox = () => {
@@ -37,7 +36,7 @@ const SearchBox = () => {
         {/* Keyword Input */}
         <input
           type='text'
-          placeholder='Search products...'
+          placeholder='Search solutions...'
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           className='border border-gray-300 rounded-md p-2 w-full md:w-2/3 focus:outline-none focus:ring-2 focus:ring-purple-500'

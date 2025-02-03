@@ -41,7 +41,7 @@ const ProductCategories = () => {
       <section className='py-16 bg-gradient-to-br from-blue-50 to-gray-100'>
         <div className='container mx-auto text-center'>
           <h2 className='text-3xl font-bold text-gray-800 mb-8'>
-            Our Products
+            Our Solor Solutions
           </h2>
           <SearchBox />
 

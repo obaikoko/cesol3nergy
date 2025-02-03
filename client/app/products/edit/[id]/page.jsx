@@ -132,7 +132,7 @@ const ProductEdit = () => {
             </div>
 
             <div className='flex flex-col'>
-              <label className='text-gray-600 font-medium'>Price</label>
+              <label className='text-gray-600 font-medium'>Price (In Naira)</label>
               <input
                 type='number'
                 placeholder='Enter price'
@@ -153,10 +153,10 @@ const ProductEdit = () => {
             </div>
 
             <div className='flex flex-col'>
-              <label className='text-gray-600 font-medium'>Brand</label>
+              <label className='text-gray-600 font-medium'>Components</label>
               <input
                 type='text'
-                placeholder='Enter brand'
+                placeholder='Enter Components'
                 name='brand'
                 value={brand}
                 onChange={handleFormChange}
@@ -181,11 +181,12 @@ const ProductEdit = () => {
             <div className='flex flex-col'>
               <select onChange={handleFormChange} name='category' id='category'>
                 <option value=''>Select Category</option>
-                <option value='Generators'>Generators</option>
-                <option value='Inverters'>Inverters</option>
-                <option value='Batteries'>Batteries</option>
-                <option value='Panels'>Panels</option>
-                <option value='Controllers'>Controllers</option>
+                <option value='Basic Solutions'>Basic Solutions</option>
+                <option value='Standard Solutions'>Standard Solutions</option>
+                <option value='Adnvanced Solutions'>Adnvanced Solutions</option>
+                <option value='Industrial Solutions'>
+                  Industrial Solutions
+                </option>
               </select>
             </div>
 
@@ -202,7 +203,7 @@ const ProductEdit = () => {
 
             <button
               type='submit'
-              className='w-full bg-gradient-to-r from-purple-600 to-orange-500 text-white font-semibold py-2 rounded hover:bg-purple-700 transition mt-4'
+              className='w-full  bg-purple-600  text-white font-semibold py-2 rounded hover:bg-purple-700 transition mt-4'
             >
               {loadingUpdate ? 'Updating...' : 'Update'}
             </button>

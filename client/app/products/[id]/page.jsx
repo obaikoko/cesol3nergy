@@ -57,7 +57,7 @@ const ProductPage = () => {
                 <strong>Category:</strong> {product.category}
               </p>
               <p className='text-gray-700 mb-2'>
-                <strong>Brand:</strong> {product.brand}
+                <strong>Components:</strong> {product.brand}
               </p>
               <p className='text-gray-700 mb-2'>
                 <strong>Price:</strong> &#8358;{product.price.toLocaleString()}

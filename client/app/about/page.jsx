@@ -1,4 +1,3 @@
-// components/AboutUs.js
 'use client';
 
 import Footer from '@/components/Footer';
@@ -31,7 +30,6 @@ const certifications = [
     description: 'Certified Solar Installation Partner',
   },
 ];
-
 
 export default function AboutUs() {
   const fadeIn = useSpring({ opacity: 1, from: { opacity: 0 }, delay: 200 });
@@ -71,6 +69,53 @@ export default function AboutUs() {
                   power needs for a brighter, sustainable future.
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* How Cesol3nergy Works */}
+          <div className='text-center mb-12'>
+            <h2 className='text-4xl font-bold mb-6'>How Cesol3nergy Works</h2>
+            <p className='text-lg text-gray-600 mb-8'>
+              Switch to solar and save up to 60% on your energy costs with
+              Cesol3nergy! Going green has never been this simple.
+            </p>
+            <div className='text-left max-w-3xl mx-auto'>
+              <h3 className='text-xl font-semibold text-blue-800 mb-4'>
+                Step 1: Sign Up
+              </h3>
+              <p className='text-gray-600 mb-4'>
+                Visit our sign-up page and fill out the form to kickstart your
+                journey to reliable, clean energy. It’s quick, easy, and the
+                first step to saying goodbye to constant power issues!
+              </p>
+              <h3 className='text-xl font-semibold text-blue-800 mb-4'>
+                Step 2: Explore Your Options
+              </h3>
+              <p className='text-gray-600 mb-4'>
+                Check out our product page to explore a variety of solar
+                solutions carefully designed to match your energy needs. Whether
+                it’s for your home or business, we’ve got something for you.
+              </p>
+              <h3 className='text-xl font-semibold text-blue-800 mb-4'>
+                Step 3: Flexible Payment Options
+              </h3>
+              <p className='text-gray-600 mb-4'>
+                Found the perfect solar solution? Great! Proceed to your cart
+                and choose a payment option that works best for you. We’ve made
+                it simple and convenient.
+              </p>
+              <h3 className='text-xl font-semibold text-blue-800 mb-4'>
+                Step 4: Seamless Installation
+              </h3>
+              <p className='text-gray-600 mb-8'>
+                Once your payment is confirmed, our professional engineers will
+                deliver and install your solar system at your location. With
+                Cesol3nergy, your Go Green plan is executed quickly,
+                effectively, and stress-free.
+              </p>
+              <p className='text-lg font-bold text-gray-800'>
+                Ready to make the switch? Let’s get started today!
+              </p>
             </div>
           </div>
 
@@ -124,6 +169,25 @@ export default function AboutUs() {
                 </animated.div>
               ))}
             </div>
+          </div>
+
+          {/* Cesol3nergy's Mission */}
+          <div className='text-center mb-12'>
+            <h2 className='text-4xl font-bold mb-6'>Cesol3nergy's Mission</h2>
+            <p className='text-lg text-gray-600 mb-8'>
+              At Cesol3nergy, our mission is to make clean and reliable energy
+              accessible to everyone in Nigeria. We provide affordable and
+              innovative solar solutions that help individuals, families, and
+              businesses switch easily from traditional power sources to solar
+              energy.
+            </p>
+            <p className='text-lg text-gray-600 mb-4'>
+              Our goal is to ensure you enjoy steady and cost-effective
+              electricity while protecting the environment. By focusing on
+              quality, customer satisfaction, and sustainability, we’re working
+              towards a future where every Nigerian has the power they need to
+              grow, achieve their dreams, and live better.
+            </p>
           </div>
         </div>
       </section>
