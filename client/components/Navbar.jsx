@@ -105,7 +105,7 @@ const Navbar = () => {
             href='/products'
             className='hover:text-yellow-200 transition duration-300'
           >
-            Products
+            Solutions
           </Link>
           <CartBtn cartItems={cartItems} />
 

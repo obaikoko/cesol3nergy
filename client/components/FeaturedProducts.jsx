@@ -1,3 +1,4 @@
+import Link from 'next/link';
 const products = [
   {
     title: 'Basic Home Solution',
@@ -5,6 +6,7 @@ const products = [
       'Designed for light load applications like lighting, fans, and small appliances. Perfect for small households.',
     price: '700K',
     image: '/images/basic.jpg',
+    link: '/products/search?keyword=&category=Basic%20Solutions',
   },
   {
     title: 'Standard Family Solution',
@@ -12,6 +14,7 @@ const products = [
       'Reliable and efficient for medium-sized homes, supporting TVs, fridges, and more. A balance of cost and power.',
     price: '1.8M',
     image: '/images/standard.jpg',
+    link: '/products/search?keyword=&category=Standard%20Solutions',
   },
   {
     title: 'Advanced Business Solution',
@@ -19,6 +22,7 @@ const products = [
       'High-capacity inverter system suitable for small businesses or offices, ensuring uninterrupted operations.',
     price: '4M',
     image: '/images/advanced.jpg',
+    link: '/products/search?keyword=&category=Advanced%20Solutions',
   },
   {
     title: 'Industrial Load Solution',
@@ -26,6 +30,7 @@ const products = [
       'Heavy-duty solution built for industrial equipment and large-scale energy needs. Durable and robust.',
     price: '8M',
     image: '/images/industrial.jpg',
+    link: '/products/search?keyword=&category=Industrial%20Solutions',
   },
 ];
 
@@ -50,6 +55,12 @@ export default function FeaturedProducts() {
                   {product.title}
                 </h3>
                 <p className='text-gray-600 my-2'>{product.description}</p>
+                <p>
+                  
+                  <Link className='text-purple-600 underline' href={product.link}>
+                    see more
+                  </Link>
+                </p>
               </div>
             </div>
           ))}

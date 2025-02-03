@@ -25,7 +25,7 @@ const HeroSection = () => {
             href='/products'
             className='bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg text-center'
           >
-            Explore Products
+            Explore Our Solutions
           </Link>
           <Link
             href='/contact'

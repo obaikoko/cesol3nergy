@@ -26,7 +26,7 @@ const page = () => {
       <FeaturedProducts />
       {/* <CoreOfferings /> */}
       {/* <FAQPage /> */}
-      {/* <Testimonials /> */}
+      <Testimonials />
       <BlogSection />
       <WhyChooseUs />
       <Footer />
