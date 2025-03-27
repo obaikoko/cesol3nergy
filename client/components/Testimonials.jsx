@@ -6,22 +6,22 @@ import { useState, useEffect } from 'react';
 
 const testimonials = [
   {
-    name: 'Jane Doe',
+    name: 'Michael Okereke',
     title: 'Eco Enthusiast',
     quote: 'CESOL3NERGY has transformed our energy consumption at home!',
-    image: '/images/customer1.jpg',
+    // image: '/images/customer1.jpg',
   },
   {
-    name: 'John Smith',
+    name: 'Lawal Ibrahim',
     title: 'Business Owner',
     quote: 'Our solar setup has saved us thousands on energy costs!',
-    image: '/images/customer2.jpg',
+    // image: '/images/customer2.jpg',
   },
   {
-    name: 'Sarah Lee',
+    name: 'Kemi Folashade',
     title: 'Homeowner',
     quote: 'Reliable, efficient, and eco-friendly—perfect for our home.',
-    image: '/images/customer1.jpg',
+    // image: '/images/customer1.jpg',
   },
 ];
 

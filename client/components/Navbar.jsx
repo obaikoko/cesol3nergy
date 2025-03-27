@@ -46,7 +46,7 @@ const Navbar = () => {
 
         {/* Hamburger Icon */}
         <div className=' flex md:hidden'>
-          <CartBtn cartItems={cartItems} />
+          {/* <CartBtn cartItems={cartItems} /> */}
           <button onClick={toggleMenu} className=' ml-3 focus:outline-none'>
             <div className={`hamburger ${isOpen ? 'open' : ''}`}>
               <span className='block w-7 h-0.5 bg-white transition-transform duration-300 ease-in-out'></span>
@@ -98,7 +98,7 @@ const Navbar = () => {
           >
             Contact
           </Link>
-          <Link
+          {/* <Link
             onClick={() => {
               setIsOpen(!isOpen), setIsProfileOpen(false);
             }}
@@ -106,8 +106,8 @@ const Navbar = () => {
             className='hover:text-yellow-200 transition duration-300'
           >
             Solutions
-          </Link>
-          <CartBtn cartItems={cartItems} />
+          </Link> */}
+          {/* <CartBtn cartItems={cartItems} /> */}
 
           {isLoggedIn ? (
             <>

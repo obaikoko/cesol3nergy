@@ -32,11 +32,11 @@ const Footer = () => {
                   Home
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href='/products' className='hover:underline'>
                   Products
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href='/about' className='hover:underline'>
                   About Us

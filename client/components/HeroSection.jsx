@@ -22,7 +22,7 @@ const HeroSection = () => {
         </p>
         <div className='flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0'>
           <Link
-            href='/products'
+            href='/services'
             className='bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg text-center'
           >
             Explore Our Solutions

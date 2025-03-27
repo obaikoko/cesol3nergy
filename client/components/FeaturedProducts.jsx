@@ -57,9 +57,9 @@ export default function FeaturedProducts() {
                 <p className='text-gray-600 my-2'>{product.description}</p>
                 <p>
                   
-                  <Link className='text-purple-600 underline' href={product.link}>
+                  {/* <Link className='text-purple-600 underline' href={product.link}>
                     see more
-                  </Link>
+                  </Link> */}
                 </p>
               </div>
             </div>
